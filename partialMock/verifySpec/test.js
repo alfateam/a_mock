@@ -24,7 +24,7 @@ describe('verifySpec',function() {
 			var returned = sut(mockContext);	
 		}
 		catch(err) {
-			msg = err;
+			msg = err.message;
 		}
 		
 

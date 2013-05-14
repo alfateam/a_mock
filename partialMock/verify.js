@@ -1,7 +1,7 @@
 function verify(mockContext) {	
 	var count = mockContext.expectCount;
 	if (count > 0)
-		throw 'mock has ' + count + ' pending functions';
+		throw new Error('mock has ' + count + ' pending functions');
 	return true;
 }
 
