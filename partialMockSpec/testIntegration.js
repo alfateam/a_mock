@@ -1,4 +1,5 @@
 var assert = require('assert');
+var test = require('../test');
 var newMock = require('../partialMock/simple/newMock');
 var newSut = require('../partialMock');
 
@@ -10,9 +11,10 @@ function fallback(arg,arg2)
 	return fallbackValue;
 }
 
-describe('partialMock', function(){
+(function(){
+	console.log('partialMock');
 
-	it('should return expected given stubbed twice with repeat',function() {
+	test('it should return expected given stubbed twice with repeat',function() {
 		var arg = 'a';
 		var arg2 = 'b';
 		var expected = {};
@@ -34,7 +36,7 @@ describe('partialMock', function(){
 	});
 
 
-	it('should return expected given stubbed twice',function() {
+	test('it should return expected given stubbed twice',function() {
 		var arg = 'a';
 		var arg2 = 'b';
 		var expected = {};
@@ -48,7 +50,7 @@ describe('partialMock', function(){
 		assert.equal(returned2,expected2);
 	});
 
-	it('should return expected given stubbed twice and called unordered',function() {
+	test('it should return expected given stubbed twice and called unordered',function() {
 		var arg = 'a';
 		var arg2 = 'b';
 		var expected = {};
@@ -63,7 +65,7 @@ describe('partialMock', function(){
 	});
 
 
-	it('should return expected for correct arg',function() {
+	test('it should return expected for correct arg',function() {
 		var arg = 'a';
 		var expected = {};
 		var sut = newSut(fallback);
@@ -74,7 +76,7 @@ describe('partialMock', function(){
 		assert.equal(returned2,fallbackValue);
 	});
 
-	it('should return expected for expected array',function() {
+	test('it should return expected for expected array',function() {
 		var element1 = 'a';
 		var element2 = 'b';
 		var expected = {};
@@ -87,7 +89,7 @@ describe('partialMock', function(){
 	});
 
 
-	it('should return expected for correct arg,arg2',function() {
+	test('it should return expected for correct arg,arg2',function() {
 		var arg = 'a';
 		var arg2 = 'b';
 		var expected = {};
@@ -101,7 +103,7 @@ describe('partialMock', function(){
 		assert.ok(sut.verify());
 	});
 
-	it('should return expected for correct arg,arg2.repeat twice',function() {
+	test('it should return expected for correct arg,arg2.repeat twice',function() {
 		var arg = 'a';
 		var arg2 = 'b';
 		var expected = {};
@@ -119,7 +121,7 @@ describe('partialMock', function(){
 		assert.ok(sut.verify());
 	});
 
-	it('should return expected for correct arg,arg2.repeat any',function() {
+	test('it should return expected for correct arg,arg2.repeat any',function() {
 		var arg = 'a';
 		var arg2 = 'b';
 		var expected = {};
@@ -136,7 +138,7 @@ describe('partialMock', function(){
 		assert.ok(sut.verify());
 	});
 
-	it('should invoke whenCalled for correct arg,arg2.repeat twice',function() {
+	test('it should invoke whenCalled for correct arg,arg2.repeat twice',function() {
 		var arg = 'a';
 		var arg2 = 'b';
 		var expected = {};
@@ -159,7 +161,7 @@ describe('partialMock', function(){
 		assert.equal(numberOfInvokes,2);
 	});
 
-	it('should return expected for multiExpect arg,arg2',function() {
+	test('it should return expected for multiExpect arg,arg2',function() {
 		var arg = 'a';
 		var arg2 = 'b';
 		var arg3 = '3';
@@ -177,7 +179,7 @@ describe('partialMock', function(){
 		assert.ok(sut.verify());
 	});
 
-	it('should return expected for arg, anything',function() {
+	test('it should return expected for arg, anything',function() {
 		var arg = 'a';
 		var arg2 = 'b';
 		var arg3;
@@ -195,7 +197,7 @@ describe('partialMock', function(){
 	});
 
 
-	it('should return expected for void',function() {
+	test('it should return expected for void',function() {
 		var expected = {};
 		var sut = newSut(fallback);
 
@@ -214,7 +216,7 @@ describe('partialMock', function(){
 		assert.ok(sut.verify());
 	});
 
-	it('should return expected for undefined',function() {
+	test('it should return expected for undefined',function() {
 		var expected = {};
 		var sut = newSut(fallback);
 
@@ -234,4 +236,4 @@ describe('partialMock', function(){
 	});
 
 
-});
+})();

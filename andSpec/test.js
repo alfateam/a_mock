@@ -1,20 +1,24 @@
 var assert = require('assert');
+var test = require('../test');
 var newRequireMock = require('../partialMock/simple/newRequireMock');
 var newMock = require('../partialMock/simple/newMock');
 
 
-describe('and', function(){
+(function(){
+	console.log('and');
 	var sut = require('../and');
 
-	describe('execute',function() {
+	(function() {
+		console.log('execute');
 		var returned = sut();
 
-		it('returns true',function() {
+		test('it returns true',function() {
 			assert.ok(returned)
 		});
-	});
+	})();
 
-	describe('add',function() {
+	(function() {
+		console.log('add');
 		var newMonadicAnd = newRequireMock('./and/newMonadicAnd');
 		var monadicAnd = {};
 		var predicate = {};
@@ -22,10 +26,10 @@ describe('and', function(){
 		
 		var returned = sut.add(predicate);
 
-		it('returns monadicAnd',function() {
+		test('it returns monadicAnd',function() {
 			assert.equal(monadicAnd,returned);
 		});
-	});
+	})();
 
-});
+})();
 

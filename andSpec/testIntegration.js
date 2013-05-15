@@ -1,11 +1,12 @@
 var assert = require('assert');
+var test = require('../test');
 var newRequireMock = require('../partialMock/simple/newRequireMock');
 var newMock = require('../partialMock/simple/newMock');
 
 var and = require('../and');
 
-describe('and', function(){
-
+(function(){
+	console.log('and');
 	var arg = {};
 	var arg2 = {};
 	var predicate1 = newMock();
@@ -17,8 +18,7 @@ describe('and', function(){
 	var and2 = and.add(predicate1,predicate2).add(predicate3);
 	var returned = and2(arg,arg2);
 
-	it('should return true',function() {
-
+	test('it should return true',function() {
 		assert.ok(returned);
 	});
-});
+})();

@@ -1,4 +1,5 @@
 var assert = require('assert');
+var test = require('../test')
 var newRequireMock = require('../partialMock/simple/newRequireMock');
 var newMock = require('../partialMock/simple/newMock');
 
@@ -11,12 +12,14 @@ var tryRemove = newRequireMock('./eventEmitter/tryRemove');
 
 var newSut = require('../eventEmitter');
 
-describe('newEventEmitter', function(){
+(function(){
+	console.log('newEventEmitter');
 	var context = {};
 	newEmitterContext.expect().return(context);
 	var sut = newSut();
 
-	describe('add',function() {
+	(function() {
+		console.log('add');
 		var callback = {};
 		var didAdd;
 		add.expect(context).expect(callback).whenCalled(onAdd).return();
@@ -26,17 +29,18 @@ describe('newEventEmitter', function(){
 			didAdd = true;
 		}
 
-		it('it forwards to add',function() {
+		test('it forwards to add',function() {
 			assert.ok(didAdd);
 		});
 
-		it('returns self',function() {
+		test('it returns self',function() {
 			assert.equal(returned,sut);
 		});
 
-	});
+	})();
 
-	describe('tryAdd',function() {
+	(function() {
+		console.log('tryAdd');
 		var callback = {};
 		var didAdd;
 		tryAdd.expect(context).expect(callback).whenCalled(onAdd).return();
@@ -46,17 +50,18 @@ describe('newEventEmitter', function(){
 			didAdd = true;
 		}
 
-		it('it forwards to tryAdd',function() {
+		test('it it forwards to tryAdd',function() {
 			assert.ok(didAdd);
 		});
 
-		it('returns self',function() {
+		test('it returns self',function() {
 			assert.equal(returned,sut);
 		});
 
-	});
+	})();
 
-	describe('remove',function() {
+	(function() {
+		console.log('remove');
 		var callback = {};
 		var didRemove;
 		remove.expect(context).expect(callback).whenCalled(onRemove).return();
@@ -66,17 +71,18 @@ describe('newEventEmitter', function(){
 			didRemove = true;
 		}
 
-		it('it forwards to remove',function() {
+		test('it it forwards to remove',function() {
 			assert.ok(didRemove);
 		});
 
-		it('returns self',function() {
+		test('it returns self',function() {
 			assert.equal(returned,sut);
 		});
 
-	});
+	})();
 
-	describe('tryRemove',function() {
+	(function() {
+		console.log('tryRemove');
 		var callback = {};
 		var didtryRemove;
 		tryRemove.expect(context).expect(callback).whenCalled(ontryRemove).return();
@@ -86,17 +92,18 @@ describe('newEventEmitter', function(){
 			didtryRemove = true;
 		}
 
-		it('it forwards to tryRemove',function() {
+		test('it it forwards to tryRemove',function() {
 			assert.ok(didtryRemove);
 		});
 
-		it('returns self',function() {
+		test('it returns self',function() {
 			assert.equal(returned,sut);
 		});
 
-	});
+	})();
 
-	describe('emit',function() {
+	(function() {
+		console.log('emit');
 		var callback = {};
 		var didemit;
 		var callback = newMock();
@@ -117,19 +124,19 @@ describe('newEventEmitter', function(){
 		}
 		var returned = sut.emit(arg);
 
-		it('it should invoke callback',function() {
+		test('it it should invoke callback',function() {
 			assert.ok(didInvokeCallback);
 		});
 
-		it('it should invoke callback2',function() {
+		test('it it should invoke callback2',function() {
 			assert.ok(didInvokeCallback2);
 		});
 
-		it('returns self',function() {
+		test('it returns self',function() {
 			assert.equal(returned,sut);
 		});
 
-	});
+	})();
 
-});
+})();
 
