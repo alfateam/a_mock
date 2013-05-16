@@ -1,4 +1,5 @@
 var assert = require('assert');
+var test = require('../test');
 var mock = require('../mock');
 
 (function clearCache() {
@@ -6,8 +7,8 @@ var mock = require('../mock');
 })();
 
 
-describe('mock', function(){
-
+(function(){
+	console.log('mock');
 	var realName = 'Alfonzo';
 	function newCustomer() {
 
@@ -32,18 +33,16 @@ describe('mock', function(){
 	var returned = customer.getName();
 	var returned2 = customer.getName();
 
-	it('should first return from mock',function() {
+	test('it should first return from mock',function() {
 		assert.equal(returned,expected);
 	});
 
-
-	it('should secondly return from real object',function() {
+	test('it should secondly return from real object',function() {
 		assert.equal(returned2,realName);
 	});
 
-	it('verify should return true',function() {
+	test('it verify should return true',function() {
 		assert.ok(customerMock.verify());
 	});
 
-
-});
+})();

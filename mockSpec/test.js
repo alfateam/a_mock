@@ -1,15 +1,17 @@
 var assert = require('assert');
+var test = require('../test');
 var newRequireMock = require('../partialMock/simple/newRequireMock');
 
-describe('mock', function(){
+(function(){
+	console.log('mock');
 	var newStrictMock = newRequireMock('./strictMock');
 	var newObjectMock = newRequireMock('./mock/objectMock');
 	var mockFuncProperties = newRequireMock('./mock/mockFuncProperties');
 	var newPartialMock = newRequireMock('./partialMock');
 	var sut = require('../mock');		
 
-	describe('func input.new',function() {
-
+	(function() {
+		console.log('object input.new');
 		var input = {};
 		var objectMock = {};
 		var didMockFuncProperties;
@@ -24,43 +26,40 @@ describe('mock', function(){
 		
 		var returned = sut(input);
 	
-			it('shold return expected',function() {
+			test('it should return expected',function() {
 				assert.equal(returned,objectMock);
 			});
 	
-			it('should mock func properties',function() {
+			test('it should mock func properties',function() {
 				assert.ok(didMockFuncProperties);
 		});
-	});
+	})();
 
-	describe('func input.new',function() {
+	(function() {
+		console.log('func input.new');
 		var expected = {};
 		var input = function() {};
 		newPartialMock.expect(input).return(expected);
 
 		var returned = sut(input);
 	
-		it('shold return expected',function() {
+		test('it shold return expected',function() {
 			assert.equal(returned,expected);
 		});
 	
 	});
 
-
-	describe('empty input.new',function() {
+	(function() {
+		console.log('empty input new');
 		var expected = {};
 	
 		newStrictMock.expect().return(expected);
 
 		var returned = sut();
 	
-		it('shold return expected',function() {
+		test('it shold return expected',function() {
 			assert.equal(returned,expected);
 		});
-	});
+	})();
 
-
-
-
-
-});
+})();
