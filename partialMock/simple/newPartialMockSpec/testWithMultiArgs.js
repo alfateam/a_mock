@@ -1,5 +1,6 @@
 var newSut = require('../newPartialMock');
 var assert = require('assert');
+var test = require('../../../test');
 
 		var originalReturnValue = {};
 		var originalReturnValue2 = {};
@@ -16,10 +17,11 @@ var assert = require('assert');
 		var arg2 = {};
 
 
-describe('partialMockSpec multiple args.2', function(){
+(function(){
+	console.log('partialMockSpec multiple args.2');
 
-	describe('expect arg1,arg2 return foo once.', function() {		
-		
+	(function() {		
+		console.log('expect arg1,arg2 return foo once.');	
 		var sut = newSut(original);
 		var callBackCount = 0;
 		function onCalled(actualArg1,actualArg2) {
@@ -33,24 +35,20 @@ describe('partialMockSpec multiple args.2', function(){
 		var secondReturned = sut(arg1,arg2);
 		var thirdReturned = sut(arg1,arg2);
 
-		it('execute returns original when second arg is wrong ', function(){
+		test('it should execute returns original when second arg is wrong ', function(){
 			assert.equal(originalReturnValue,firstReturned);
     	});
 
-		it('execute returns foo when correct arguments', function(){
+		test('it should execute returns foo when correct arguments', function(){
 			assert.equal(foo,secondReturned);
     	});
 
-		it('execute returns original when correct argument second time', function(){
+		test('it should execute returns original when correct argument second time', function(){
 			assert.equal(originalReturnValue2,thirdReturned);
     	});
 
-		it('calls callBack once', function(){
+		test('it should calls callBack once', function(){
 			assert.equal(1,callBackCount);
     	});
-
-
-	});	
-
-
-});
+	})();	
+})();

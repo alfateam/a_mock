@@ -1,30 +1,32 @@
 var assert = require('assert');
-
+var test = require('../../test');
 var sut = require('../negotiateDecrementExpectCount');
 
-describe('negotiateDecrementExpectCount',function() {
-
-	describe('times is undefined.execute', function(){
-
+(function() {
+	console.log('negotiateDecrementExpectCount');
+	
+	(function(){
+		console.log('times is undefined.execute');
 		var mockContext = {};		
 		mockContext.expectCount = 2;
 		var times;
 		sut(times,mockContext);
 
-		it('should not change expectCount',function() {
+		test('it should not change expectCount',function() {
 			assert.ok(mockContext.expectCount,2);
 		});
-	});
+	})();
 	
-	describe('times is set.execute', function(){
+	(function(){
+		console.log('times is set.execute');
 		var mockContext = {};		
 		mockContext.expectCount = 2;
 		var times = 5;
 		sut(times,mockContext);
 
-		it('should decrement expectCount',function() {
+		test('it should decrement expectCount',function() {
 			assert.equal(mockContext.expectCount,1);
 		});
-	});
+	})();
 
-});
+})();

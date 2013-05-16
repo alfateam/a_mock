@@ -1,6 +1,6 @@
 var newSut = require('../newPartialMock');
 var assert = require('assert');
-
+var test = require('../../../test');
 		var originalReturnValue = {orig:''};
 		function original() {
 			return originalReturnValue;
@@ -10,10 +10,11 @@ var assert = require('assert');
 		var baz = {baz:''};		
 
 
-describe('partialMockSpec.repeat.', function(){
+(function(){
+	console.log('partialMockSpec.repeat.');
 
-	describe('expect return foo three times.', function() {		
-		
+	(function() {		
+		console.log('expect return foo three times.');
 		var sut = newSut(original);
 
 		sut.expect().return(foo).repeat(3);
@@ -22,22 +23,22 @@ describe('partialMockSpec.repeat.', function(){
 		var secondReturned = sut();
 		var thirdReturned = sut();
 
-		it('execute returns foo first time', function(){
+		test('it should execute returns foo first time', function(){
 			assert.equal(foo,firstReturned);
     	});
 
-		it('execute returns foo second time', function(){
+		test('it should execute returns foo second time', function(){
 			assert.equal(foo,secondReturned);
     	});
 
-		it('execute returns original third time', function(){
+		test('it should execute returns original third time', function(){
 			assert.equal(originalReturnValue,thirdReturned);
     	});
 
-	});
+	})();
 
-	describe('expect return foo any.', function() {		
-		
+	(function() {		
+		console.log('expect return foo any.');
 		var sut = newSut(original);
 
 		sut.expect().return(foo).repeatAny();
@@ -46,20 +47,17 @@ describe('partialMockSpec.repeat.', function(){
 		var secondReturned = sut();
 		var thirdReturned = sut();
 
-		it('execute returns foo first time', function(){
+		test('it should execute returns foo first time', function(){
 			assert.equal(foo,firstReturned);
     	});
 
-		it('execute returns foo second time', function(){
+		test('it should execute returns foo second time', function(){
 			assert.equal(foo,secondReturned);
     	});
 
-		it('execute returns foo third time', function(){
+		test('it should execute returns foo third time', function(){
 			assert.equal(foo,thirdReturned);
     	});
 
-	});
-
-
-
-});
+	})();
+})();

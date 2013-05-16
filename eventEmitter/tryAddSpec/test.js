@@ -1,11 +1,14 @@
 var assert = require('assert');
+var test = require('../../test');
 var newRequireMock = require('../../partialMock/simple/newRequireMock');
 
 var sut = require('../tryAdd');
 
-describe('tryAddSpec', function(){
+(function(){
+	console.log('tryAddSpec');
 	
-	describe('execute',function() {
+	(function() {
+		console.log('execute');
 		var add = newRequireMock('./add');
 		var didAdd;
 		var callback = {};
@@ -16,12 +19,13 @@ describe('tryAddSpec', function(){
 
 		sut(context,callback);
 		
-		it('should forward to add',function() {
+		test('it should forward to add',function() {
 			assert.ok(didAdd);
 		});
 	});
 
-	describe('execute with missing callback',function() {
+	(function() {
+		console.log('execute with missing callback');
 		var add = newRequireMock('./add');		
 		var didAdd;
 		var callback;
@@ -32,9 +36,8 @@ describe('tryAddSpec', function(){
 
 		sut(context,callback);
 		
-		it('should not forward to add',function() {
+		test('it should not forward to add',function() {
 			assert.ok(true);
 		});
-	});
-
-});
+	})();
+})();

@@ -1,4 +1,5 @@
 var assert = require('assert');
+var test = require('../../test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -8,7 +9,8 @@ var newHasArgument = newRequireMock('./newHasArgument');
 var sut = require('../expectAnything');
 
 
-describe('expectAnything', function(){
+(function(){
+	console.log('expectAnything');
 	var mockContext = {};
 	var hasArgument = {};
 	var index = {};
@@ -27,8 +29,8 @@ describe('expectAnything', function(){
 
 	var returned  = sut(index,mockContext);
 
-	it('should return expected from expectCore',function() {
+	test('it should return expected from expectCore',function() {
 		assert.equal(expected,returned);
 	});
 
-});
+})();

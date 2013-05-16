@@ -1,11 +1,13 @@
 var assert = require('assert');
+var test = require('../../test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
 var newSut = require('../newHasEqualArgumentArray');
 
 
-describe('newHasEqualArgumentArray', function() {
+(function() {
+	console.log('newHasEqualArgumentArray');
 	var expectedElement1 = {};
 	var expectedElement2 = {};
 	var expectedArg = [expectedElement1,expectedElement2];
@@ -13,42 +15,45 @@ describe('newHasEqualArgumentArray', function() {
 	
 	var sut = newSut(expectedArg,index);
 
-	describe('too few arguments.execute',function() {
+	(function() {
+		console.log('too few arguments.execute');
 		var returned = sut('arg');
 
-		it('should return false',function() {
+		test('it should return false',function() {
 			assert.equal(false,returned);
 		});
 		
-	});
+	})();
 
-	describe('incorrect argument.execute',function() {
+	(function() {
+		console.log('incorrect argument.execute');
 		var returned = sut('arg',[expectedElement1,'wrongElement']);
 
-		it('should return false',function() {
+		test('it should return false',function() {
 			assert.equal(false,returned);
 		});
 
-	});
+	})();
 
-	describe('incorrect arrayLength.execute',function() {
+	(function() {
+		console.log('incorrect arrayLength.execute');
 		var returned = sut('arg',[expectedElement1,expectedElement2,'off-by-one']);
 
-		it('should return false',function() {
+		test('it should return false',function() {
 			assert.equal(false,returned);
 		});
 
-	});
+	})();
 
 
-	describe('correct argument.execute',function() {
+	(function() {
+		console.log('correct argument.execute');
 		var returned = sut('arg',[expectedElement1,expectedElement2]);
 
-		it('should return true',function() {
+		test('it should return true',function() {
 			assert.equal(true,returned);
 		});
 
-	});
-
-
-});
+	})();
+	
+})();

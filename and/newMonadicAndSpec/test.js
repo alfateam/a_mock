@@ -1,4 +1,5 @@
 var assert = require('assert');
+var test = require('../../test');
 var newRequireMock = require('../../partialMock/simple/newRequireMock');
 var newMock = require('../../partialMock/simple/newMock');
 
@@ -6,26 +7,27 @@ var newBinaryAnd = newRequireMock('./newBinaryAnd');
 var newSut = require('../newMonadicAnd');
 
 
-describe('newMonadicAnd', function(){
+(function(){
+	console.log('newMonadicAnd');
 	var predicate = newMock();	
 	var sut = newSut(predicate);
 
-
-	describe('execute',function() {
+	(function() {
+		console.log('execute');
 		var arg = {};
 		var expected = {};
 		predicate.expect(arg).return(expected);
 		
 		var returned = sut(arg);
 
-		it('returns expected from predicate',function() {
+		test('returns expected from predicate',function() {
 			assert.equal(expected,returned);
 		});
-	});
+	})();
 
 
-	describe('add',function() {
-		
+	(function() {
+		console.log('add');
 		var binaryAnd = {};
 		var predicate = {};
 		var predicate2 = {};
@@ -35,10 +37,9 @@ describe('newMonadicAnd', function(){
 		
 		var returned = sut.add(predicate,predicate2);
 
-		it('returns expected',function() {
+		test('returns expected',function() {
 			assert.equal(expected,returned);
 		});
-	});
+	})();
 
-});
-
+})();

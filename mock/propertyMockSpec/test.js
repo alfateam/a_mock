@@ -1,7 +1,9 @@
 var assert = require('assert');
+var test = require('../../test');
 var newMock = require('../../partialMock/simple/newMock');
 
-describe('propertyMock.new', function(){
+(function(){
+	console.log('propertyMock.new');
 	newSut = require('../propertyMock');
 
 	var subject = {};
@@ -15,20 +17,20 @@ describe('propertyMock.new', function(){
 	var objectMock = {}
 	var sut = newSut(subject,'a',mock);
 
-	it('should set subProperties',function() {
+	test('it should set subProperties',function() {
 		assert.equal(sut.a.a1,a1);
 	});
 
-	describe('execute mocked property',function() {
+	(function() {
+		console.log('execute mocked property');
 		var mockedValue = {};
 		var arg = {};
 		mock.expect(arg).return(mockedValue);
 		var returned = sut(arg);
 
-		it('should return mocked value',function() {
+		test('it should return mocked value',function() {
 			assert.equal(returned,mockedValue)
 		});
-	});
+	})();
 	
-
-});
+})();

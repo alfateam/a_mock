@@ -1,42 +1,45 @@
 var assert = require('assert');
+var test = require('../../test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
 var newSut = require('../newHasSameArgument');
 
 
-describe('newHasSameArgument', function() {
+(function() {
+	console.log('newHasSameArgument');
 	var expectedArg = {};
 	var index = 1;
 	
 	var sut = newSut(expectedArg,index);
 
-	describe('too few arguments.execute',function() {
+	(function() {
+		console.log('too few arguments.execute');
 		var returned = sut('somearg');
 
-		it('should return false',function() {
+		test('it should return false',function() {
 			assert.equal(false,returned);
 		});
 		
-	});
+	})();
 
-	describe('incorrect argument.execute',function() {
+	(function() {
+		console.log('incorrect argument.execute');
 		var returned = sut('arg','arg2');
 
-		it('should return false',function() {
+		test('it should return false',function() {
 			assert.equal(false,returned);
 		});
 
-	});
+	})();
 
-	describe('correct argument.execute',function() {
+	(function() {
+		console.log('correct argument.execute');
 		var returned = sut('arg',expectedArg);
 
-		it('should return true',function() {
+		test('it should return true',function() {
 			assert.equal(true,returned);
 		});
 
-	});
-
-
-});
+	})();
+})();

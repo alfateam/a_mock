@@ -1,25 +1,25 @@
 var assert = require('assert');
-
+var test = require('../test');
 var newSut = require('../newTrueOnceThenFalse');
 
-describe('newTrueOnceThenFalse', function(){
-
+(function(){
+	console.log('newTrueOnceThenFalse');
 	var sut = newSut();
 
-	describe('execute',function() {
-
+	(function() {
+		console.log('execute');
 		var returned = sut();
 		
-		it('should return true',function() {
+		test('it should return true',function() {
 			assert.equal(true,returned);
 		});
 
-		describe('execute',function() {
-
+		(function() {
+			console.log('execute');
 			var returned = sut();
-			it('should return false',function() {
+			test('it should return false',function() {
 				assert.equal(false,returned);
 			});
-		});
-	});
-});
+		})();
+	})();
+})();

@@ -1,42 +1,43 @@
 var assert = require('assert');
+var test = require('../../test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
 var newSut = require('../newHasNoMoreArguments');
 
 
-describe('newHasNoMoreArguments', function() {
+(function() {
+	console.log('newHasNoMoreArguments');
 	var length = 1;
 
 	var sut = newSut(length);
 
-	describe('two arguments too much.execute',function() {
+	(function() {
+		console.log('two arguments too much.execute');
 		var returned = sut('somearg','c','d');
 
-		it('should return false',function() {
+		test('it should return false',function() {
 			assert.equal(false,returned);
 		});
 		
-	});
+	})();
 
-	describe('one argument too much.execute',function() {
+	(function() {
+		console.log('one argument too much.execute');
 		var returned = sut('somearg','c');
 
-		it('should return false',function() {
+		test('it should return false',function() {
 			assert.equal(false,returned);
 		});
 		
-	});
+	})();
 
-	describe('correct number of arguments.execute',function() {
+	(function() {
+		console.log('correct number of arguments.execute');
 		var returned = sut('a');
 
-		it('should return true',function() {
+		test('it should return true',function() {
 			assert.equal(true,returned);
-		});
-		
-	});
-
-
-
-});
+		});		
+	})();		
+})();

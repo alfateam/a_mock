@@ -1,13 +1,16 @@
 var assert = require('assert');
+var test = require('../../test');
 var newRequireMock = require('../../partialMock/simple/newRequireMock');
 var newMock = require('../../partialMock/simple/newMock');
 
-describe('mockFuncProperties', function(){
+(function(){
+	console.log('mockFuncProperties');
 	var newPropertyMock = newRequireMock('./propertyMock');
 	var mockFuncProperties = newRequireMock('./mockFuncProperties');
 	var sut = require('../mockFuncProperties');
 
-	describe('subject is non-primitive',function() {
+	(function() {
+		console.log('subject is non-primitive');
 		var subject = {};
 		var a2 = {};
 		var a = function() {};
@@ -37,29 +40,28 @@ describe('mockFuncProperties', function(){
 
 		sut(subject,mockObject);
 		
-		it('should mock property a',function() {
+		test('it should mock property a',function() {
 			assert.equal(subject.a,expectedA);
 		});
 	
-		it('should mock subProperties',function() {
+		test('it should mock subProperties',function() {
 			assert.ok(didMockSubProperties);
 		});
 
-		it('should not change property b',function() {
+		test('it should not change property b',function() {
 			assert.equal(subject.b,b);
 		});
-	});
+	})();
 
-	describe('subject is primitive',function() {
+	(function() {
+		console.log('subject is primitive');
 		var subject = 'a';
 		var mockObject = 'a';
 
 		sut(subject,mockObject);
 		
-		it('should not throw',function() {
+		test('it should not throw',function() {
 			assert(true);
 		});	
-	});
-
-
-});
+	})();
+})();

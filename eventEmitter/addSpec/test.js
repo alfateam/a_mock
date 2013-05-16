@@ -1,11 +1,12 @@
 var assert = require('assert');
-
+var test = require('../../test');
 var sut = require('../add');
 
-describe('addSpec', function(){
-	
+(function(){
+	console.log('addSpec');
 
-	describe('execute',function() {
+	(function() {
+		console.log('execute');
 		var context = {};
 		var callbacks = [{}];
 		context.callbacks = callbacks;
@@ -13,9 +14,9 @@ describe('addSpec', function(){
 
 		sut(context,callback);
 		
-		it('should add callback to callbacks',function() {
+		test('it should add callback to callbacks',function() {
 			assert.equal(callbacks[1],callback);
 		});
-	});
+	})();
 
-});
+})();

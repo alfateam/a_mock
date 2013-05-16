@@ -1,14 +1,17 @@
 var assert = require('assert');
+var test = require('../../test');
 var newRequireMock = require('../../partialMock/simple/newRequireMock');
 var newMock = require('../../partialMock/simple/newMock');
 
-describe('objectMock', function(){
+(function(){
+	console.log('objectMock');
 	var newMockContext = newRequireMock('./mockContext');
 	var newPartialMock = newRequireMock('../partialMock');
 	var newSut =  require('../objectMock');
 	
 
-	describe('subject is object.new',function() {
+	(function() {
+		console.log('subject is object.new');
 		var newObjectMock = newRequireMock('./objectMock');
 		var initialMockContext = {}
 		var mockContext = {};
@@ -28,25 +31,25 @@ describe('objectMock', function(){
 
 		var returned = newSut(subject,initialMockContext);
 
-		it('should not return subject', function(){
+		test('it should not return subject', function(){
 			assert.notEqual(returned,subject);
 	    });
 
-	    it('should mock property a',function() {
+	    test('it should mock property a',function() {
 	    	assert.equal(returned.a,aMock);
 	    });
 
-	    it('should mock property b',function() {
+	    test('it should mock property b',function() {
 	    	assert.equal(returned.a,aMock);
 	    });
 
-	    it('should set verify',function() {
+	    test('it should set verify',function() {
 	    	assert.equal(returned.verify,verify);
 	    });
+	})();
 
-	});
-
-	describe('subject is func.new',function() {
+	(function() {
+		console.log('subject is func.new');
 		var newObjectMock = newRequireMock('./objectMock');
 		var initialMockContext = {}
 		var mockContext = {};
@@ -77,26 +80,26 @@ describe('objectMock', function(){
 
 		var returned = newSut(subject,initialMockContext);
 
-		it('should return partialMock', function(){
+		test('it should return partialMock', function(){
 			assert.equal(returned,partialMock);
 	    });
 
-	    it('should mock property a',function() {
+	    test('it should mock property a',function() {
 	    	assert.equal(returned.a,aMock);
 	    });
 
-	    it('should mock property b',function() {
+	    test('it should mock property b',function() {
 	    	assert.equal(returned.a,aMock);
 	    });
 
-	    it('should add verify to mockContext.verify',function() {
+	    test('it should add verify to mockContext.verify',function() {
 	    	assert.ok(didAddVerifyToComposite);
 	    });
 
-	});
+	})();
 
-
-	describe('subject is primitive',function() {
+	(function() {
+		console.log('subject is primitive');
 		var newObjectMock = newRequireMock('./objectMock');
 		var initialMockContext = {}
 		var mockContext = {};
@@ -109,19 +112,12 @@ describe('objectMock', function(){
 
 		var returned = newSut(subject,initialMockContext);
 
-		it('should return object', function(){
+		test('it should return object', function(){
 			assert.ok(returned instanceof Object);
 	    });
 
-   	    it('should set verify',function() {
+   	    test('it should set verify',function() {
 	    	assert.equal(returned.verify,verify);
 	    });
-
-
-	});
-
-
-	
-
-
-});
+	})();
+})();

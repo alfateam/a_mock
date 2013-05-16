@@ -1,5 +1,6 @@
 var newSut = require('../newPartialMock');
 var assert = require('assert');
+var test = require('../../../test');
 
 		var originalReturnValue = {orig:''};
 		function original() {
@@ -10,9 +11,11 @@ var assert = require('assert');
 		var baz = {baz:''};		
 
 
-describe('partialMockSpec', function(){
+(function(){
+	console.log('partialMockSpec');
 
-	describe('expect return foo once.', function() {		
+	(function() {		
+		console.log('expect return foo once');
 		
 		var sut = newSut(original);
 
@@ -22,22 +25,22 @@ describe('partialMockSpec', function(){
 		var secondReturned = sut();
 		var thirdReturned = sut();
 
-		it('execute returns foo first time', function(){
+		test('it should execute returns foo first time', function(){
 			assert.equal(foo,firstReturned);
     	});
 
-		it('execute returns original second time', function(){
+		test('it should execute returns original second time', function(){
 			assert.equal(originalReturnValue,secondReturned);
     	});
 
-		it('execute returns original third time', function(){
+		test('it should execute returns original third time', function(){
 			assert.equal(originalReturnValue,thirdReturned);
     	});
 
-	});
+	})();
 
-	describe('expect return foo twice.', function() {		
-		
+	(function() {		
+		console.log('expect return foo twice');		
 		var sut = newSut(original);
 		sut.expect().return(foo);
 		sut.expect().return(foo);
@@ -46,23 +49,22 @@ describe('partialMockSpec', function(){
 		var secondReturned = sut();
 		var thirdReturned = sut();
 
-		it('execute returns foo first time', function(){
+		test('it should execute returns foo first time', function(){
 			assert.equal(foo,firstReturned);
     	});
 
-		it('execute returns foo second time', function(){
+		test('it should execute returns foo second time', function(){
 			assert.equal(foo,secondReturned);
     	});
 
-		it('execute returns original third time', function(){
+		test('it should execute returns original third time', function(){
 			assert.equal(originalReturnValue,thirdReturned);
     	});
 
-	});
+	})();
 
-
-	describe('expect return foo then baz.', function() {		
-		
+	(function() {		
+		console.log('expect return foo then baz');		
 		var sut = newSut(original);
 		sut.expect().return(foo);
 		sut.expect().return(baz);
@@ -71,22 +73,22 @@ describe('partialMockSpec', function(){
 		var secondReturned = sut();
 		var thirdReturned = sut();
 
-		it('execute returns foo first time', function(){
+		test('it should execute returns foo first time', function(){
 			assert.equal(foo,firstReturned);
     	});
 
-		it('execute returns baz second time', function(){
+		test('it should execute returns baz second time', function(){
 			assert.equal(baz,secondReturned);
     	});
 
-		it('execute returns original third time', function(){
+		test('it should execute returns original third time', function(){
 			assert.equal(originalReturnValue,thirdReturned);
     	});
 
-	});
+	})();
 
-	describe('expect return when argument is undefined.', function() {		
-				
+	(function() {		
+		console.log('expect return when argument is undefined.');	
 		var sut = newSut(original);
 		var arg = {};
 		var someUndefined;
@@ -97,19 +99,17 @@ describe('partialMockSpec', function(){
 		var secondReturned = sut(arg,someUndefined);
 		var thirdReturned = sut(arg,someUndefined);
 
-		it('execute returns original first time', function(){
+		test('it should execute returns original first time', function(){
 			assert.equal(originalReturnValue,firstReturned);
     	});
 
-		it('execute returns foo second time', function(){
+		test('it should execute returns foo second time', function(){
 			assert.equal(foo,secondReturned);
     	});
 
-		it('execute returns original third time', function(){
+		test('it should execute returns original third time', function(){
 			assert.equal(originalReturnValue,thirdReturned);
     	});
 
-	});
-
-
-});
+	})();
+})();

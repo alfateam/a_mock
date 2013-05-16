@@ -1,12 +1,13 @@
 var assert = require('assert');
+var test = require('../../test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
+(function() {
+	console.log('requireExecute');
 
-
-describe('requireExecute',function() {
-
-	describe('correct arguments.execute', function(){
+	(function(){
+		console.log('correct arguments.execute');
 		var sut = require('../execute');
 		var returnValue = {};
 		var fallback = newMock();
@@ -42,22 +43,22 @@ describe('requireExecute',function() {
 
 		var returned =  sut(returnValue,fallback,hasCorrectArguments,mockContext,shouldDecrement,whenCalledEmitter,arg,arg2);
 
-		it('should emit whenCalled',function() {
+		test('it should emit whenCalled',function() {
 			assert.ok(didEmitWhenCalled);
 		});	
 		
-		it('should negotiate DecrementExpectCount',function() {
+		test('it should negotiate DecrementExpectCount',function() {
 			assert.ok(didDecrement);
 		});	
 
-		it('should return returnValue',function() {
+		test('it should return returnValue',function() {
 			assert.equal(returnValue,returned);
 		});
 
-	});
+	})();
 	
-	describe('incorrect arguments.execute', function(){
-
+	(function(){
+		console.log('incorrect arguments.execute');
 		var sut = require('../execute');
 		var returnValue = {};
 		var whenCalledEmitter = {};
@@ -76,11 +77,9 @@ describe('requireExecute',function() {
 	
 		var returned =  sut(returnValue,fallback,hasCorrectArguments,mockContext,shouldDecrement,whenCalledEmitter,arg,arg2);
 		
-		it('should return result from fallback',function() {
+		test('it should return result from fallback',function() {
 			assert.equal(expected,returned);
 		});
 
-
-	});
-
-});
+	})();
+})();

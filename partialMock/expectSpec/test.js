@@ -1,4 +1,5 @@
 var assert = require('assert');
+var test = require('../../test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -7,7 +8,8 @@ var newAreSameArgument = newRequireMock('./newHasSameArgument');
 
 var sut = require('../expect');
 
-describe('expect', function() {
+(function() {
+	console.log('expect');
 	var mockContext = {};
 	var areSameArgument = newMock();	
 	var arg = 'arg';
@@ -36,8 +38,8 @@ describe('expect', function() {
 
 	var returned = sut(index,mockContext,arg,arg2);
 
-	it('should return expected',function() {
+	test('it should return expected',function() {
 		assert.equal(expected,returned);
 	});
 
-});
+})();

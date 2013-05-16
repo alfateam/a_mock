@@ -1,11 +1,12 @@
 var assert = require('assert');
-
+var test = require('../../test');
 var newSut = require('../emitterContext');
 
-describe('newEmitterContext', function(){
+(function(){
+	console.log('newEmitterContext');
 	var returned = newSut();
 
-	it('should set callbacks to empty array',function() {
+	test('it should set callbacks to empty array',function() {
 		assert.equal(returned.callbacks.length,0);
 	});
-});
+})();

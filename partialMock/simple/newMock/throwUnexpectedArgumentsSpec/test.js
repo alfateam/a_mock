@@ -1,11 +1,13 @@
 var assert = require('assert');
+var test = require('../../../../test');
 var arg1 = 'a';
 var arg2 = {};
 var arg3 = 'c';
 var errorMsg = "Unexpected arguments: a [object Object] c."
 var thrownErrorMsg;
 
-describe('throwUnexpectedArguments', function(){
+(function(){
+	console.log('throwUnexpectedArguments');
 	var sut = require('../throwUnexpectedArguments');
 	try	{
 		sut(arg1,arg2,arg3);
@@ -14,8 +16,8 @@ describe('throwUnexpectedArguments', function(){
 		thrownErrorMsg = error;
 	}
 
-	it('should throw correct msg', function(){
+	test('it should throw correct msg', function(){
 		assert.equal(errorMsg,thrownErrorMsg);
     });
 
-});
+})();

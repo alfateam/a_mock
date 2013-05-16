@@ -1,4 +1,5 @@
 var assert = require('assert');
+var test = require('../test');
 var newMock = require('../partialMock/simple/newMock');
 var expectRequire = require('../partialMock/simple/expectRequire');
 
@@ -8,7 +9,8 @@ var expectRequireMock = newMock();
 expectRequire('./mock').return(newMockMock);
 expectRequire('./expectRequire').return(expectRequireMock);
 
-describe('newRequireMock',function() {
+(function() {
+	console.log('newRequireMock');
 	var didExpectRequireReturnMock = false;
 	var mock = {};
 	var moduleName = {};
@@ -26,12 +28,12 @@ describe('newRequireMock',function() {
 		didExpectRequireReturnMock = true;
 	}
 
-	it('should return mock', function() {
+	test('it should return mock', function() {
 		assert.equal(mock,returned);
 	});
 
-	it('should expectRequire to return mock',function(){
+	test('it should expectRequire to return mock',function(){
 		assert.ok(didExpectRequireReturnMock);
 	});
 
-});
+})();

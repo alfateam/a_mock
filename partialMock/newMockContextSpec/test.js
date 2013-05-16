@@ -1,4 +1,5 @@
 var assert = require('assert');
+var test = require('../../test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -7,7 +8,8 @@ var newMutableAnd = newRequireMock('../newMutableAnd');
 
 var newSut = require('../newMockContext');
 
-describe('newMockContext', function() {
+(function() {
+	console.log('newMockContext');
 	var originalFallback = {};
 	var fallbackWrapper = {};
 	var passedContext;
@@ -17,23 +19,23 @@ describe('newMockContext', function() {
 	
 	var sut = newSut(originalFallback);
 
-	it('should set execute to fallbackWrapper',function() {
+	test('it should set execute to fallbackWrapper',function() {
 		assert.equal(sut.execute,fallbackWrapper);
 	});
 
-	it('should set originalFallback',function() {
+	test('it should set originalFallback',function() {
 		assert.equal(sut.originalFallback,originalFallback);
 	});
 
-	it('should set compositeAreCorrectArguments',function() {
+	test('it should set compositeAreCorrectArguments',function() {
 		assert.equal(sut.compositeAreCorrectArguments,mutableAnd);
 	});
 
-	it('should set lastExecute',function() {
+	test('it should set lastExecute',function() {
 		assert.equal(sut.lastExecute,fallbackWrapper);
 	});
 
-	it('should set expectCount to zero',function() {
+	test('it should set expectCount to zero',function() {
 		assert.equal(sut.expectCount,0);
 	});
-});
+})();

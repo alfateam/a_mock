@@ -1,27 +1,30 @@
 var assert = require('assert');
+var test = require('../../test');
 var newRequireMock = require('../../partialMock/simple/newRequireMock');
 
-describe('mockContext', function(){
+(function(){
+	console.log('mockContext');
 	var newVerify = newRequireMock('../newMutableAnd');
 	var sut = require('../mockContext');
 
-	describe('empty input.new',	function() {
+	(function() {
+		console.log('empty input.new');
 		var verify = {};
 		newVerify.expect().return(verify);	
 		var returned = sut();
 
-		it('should set verify', function(){
+		test('it should set verify', function(){
 			assert.equal(returned.verify,verify);
     	});
-	});
+	})();
 
-	describe('nonEmpty input.new',	function() {
-		var input = {};
+	(function() {		
+		console.log('nonEmpty input.new');
+		var input = {};		
 		var returned = sut(input);
 
-		it('should return same', function(){
+		test('it should return same', function(){
 			assert.equal(returned,input);
     	});
-	});
-
-});
+	})();
+})();

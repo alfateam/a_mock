@@ -1,11 +1,12 @@
 var assert = require('assert');
-
+var test = require('../../test');
 var sut = require('../remove');
 
-describe('removeSpec', function(){
-	
+(function(){
+	console.log('removeSpec');
 
-	describe('execute',function() {
+	(function() {
+		console.log('execute');
 		var context = {};
 		var callback = {};
 		var callback0 = {};
@@ -16,11 +17,11 @@ describe('removeSpec', function(){
 
 		sut(context,callback);
 		
-		it('should remove callback from callbacks',function() {			
+		test('it should remove callback from callbacks',function() {			
 			assert.equal(context.callbacks[0],callback0);
 			assert.equal(context.callbacks[1],callback2);
 			assert.equal(context.callbacks.length,2);
 		});
-	});
+	})();
 
-});
+})();

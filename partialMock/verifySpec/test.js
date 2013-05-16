@@ -1,22 +1,24 @@
 var assert = require('assert');
+var test = require('../../test');
 
 var sut = require('../verify');
 
-describe('verifySpec',function() {
+(function() {
+	console.log('verifySpec');
 
-	describe('expectCount is zero.execute', function(){
-
+	(function(){
+		console.log('expectCount is zero.execute');
 		var mockContext = {};
 		mockContext.expectCount = 0;
 		var returned = sut(mockContext);
 
-		it('should return true',function() {
+		test('it should return true',function() {
 			assert.ok(returned);
 		});
-	});
+	})();
 	
-	describe('expectCount is above zero.execute', function(){
-
+	(function(){
+		console.log('expectCount is above zero.execute');
 		var mockContext = {};
 		mockContext.expectCount = 2;
 		var msg;
@@ -28,11 +30,9 @@ describe('verifySpec',function() {
 		}
 		
 
-		it('should throw mock has 2 pending functions',function() {
+		test('it should throw mock has 2 pending functions',function() {
 			assert.equal(msg,'mock has 2 pending functions');
 		});
-	});
+	})();
 
-
-
-});
+})();

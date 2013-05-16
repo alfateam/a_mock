@@ -1,11 +1,14 @@
 var assert = require('assert');
+var test = require('../../test');
 var newRequireMock = require('../../partialMock/simple/newRequireMock');
-
+var context = {};
 var sut = require('../tryRemove');
 
-describe('tryRemoveSpec', function(){
-	
-	describe('execute',function() {
+(function(){
+	console.log('tryRemoveSpec');
+
+	(function() {
+		console.log('execute');
 		var remove = newRequireMock('./remove');
 		var didremove;
 		var callback = {};
@@ -16,12 +19,13 @@ describe('tryRemoveSpec', function(){
 
 		sut(context,callback);
 		
-		it('should forward to remove',function() {
+		test('it should forward to remove',function() {
 			assert.ok(didremove);
 		});
-	});
+	})();
 
-	describe('execute with missing callback',function() {
+	(function() {
+		console.log('execute with missing callback');
 		var remove = newRequireMock('./remove');		
 		var didremove;
 		var callback;
@@ -32,9 +36,8 @@ describe('tryRemoveSpec', function(){
 
 		sut(context,callback);
 		
-		it('should not forward to remove',function() {
+		test('it should not forward to remove',function() {
 			assert.ok(true);
 		});
-	});
-
-});
+	})();
+})();

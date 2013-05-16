@@ -1,4 +1,5 @@
 var assert = require('assert');
+var test = require('../../test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -9,7 +10,8 @@ var negotiateIncrementExpectCount = newRequireMock('./negotiateIncrementExpectCo
 
 var sut = require('../setExecute');
 
-describe('setExecute', function(){
+(function(){
+	console.log('setExecute');
 	var mockContext = {};
 	var returnValue = {};
 	var hasCorrectArguments = {};
@@ -70,16 +72,16 @@ describe('setExecute', function(){
 
 	sut(returnValue,hasCorrectArguments,mockContext,times);
 
-	it('should set lastExecute',function() {
+	test('it should set lastExecute',function() {
 		assert.equal(execute,mockContext.lastExecute);
 	});
 
-	it('should set fallback on previousExecute',function() {
+	test('it should set fallback on previousExecute',function() {
 		assert.ok(didSetFallback);
 	});
 
-	it('should negotiateIncrementExpectCount',function() {
+	test('it should negotiateIncrementExpectCount',function() {
 		assert.ok(didNegotiateIncrementExpectCount);
 	});
 
-});
+})();
