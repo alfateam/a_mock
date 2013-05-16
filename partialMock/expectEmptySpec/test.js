@@ -99,4 +99,50 @@ var sut = require('../expectEmpty');
 		});
 	})();
 
+	(function() {
+		console.log('repeat');
+		var expected = {};
+		var times = 2;
+		var returnContext = {};
+		var repeatMock = newMock();
+		_return.expectAnything().expect(0).expect(mockContext).whenCalled(onReturn).return(returnContext);
+		
+		function onReturn(returnValue) {
+			if (returnValue !== undefined)
+				throw new Error('unexpected argument');
+		}
+
+		returnContext.repeat = repeatMock;
+		repeatMock.expect(times).return(expected);
+
+		var returned = sut2.repeat(times); 
+
+		test('should return expected',function() {
+			assert.equal(returned,expected)
+		});
+	})();
+
+	(function() {
+		console.log('repeatAny');
+		var expected = {};
+		var returnContext = {};
+		var repeatMock = newMock();
+		_return.expectAnything().expect(0).expect(mockContext).whenCalled(onReturn).return(returnContext);
+		
+		function onReturn(returnValue) {
+			if (returnValue !== undefined)
+				throw new Error('unexpected argument');
+		}
+
+		returnContext.repeatAny = repeatMock;
+		repeatMock.expect().return(expected);
+
+		var returned = sut2.repeatAny(); 
+
+		test('should return expected',function() {
+			assert.equal(returned,expected)
+		});
+	})();
+
+
 })();

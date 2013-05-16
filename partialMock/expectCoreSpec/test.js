@@ -67,7 +67,7 @@ var sut = require('../expectCore');
 		var returned = sut2.expect(arg,arg2); 
 
 		test('should return expected',function() {
-			assert.equal(expected,returned)
+			assert.equal(returned,expected)
 		});
 	})();
 
@@ -79,7 +79,7 @@ var sut = require('../expectCore');
 		var returned = sut2.expectAnything(); 
 
 		test('should return expected',function() {
-			assert.equal(expected,returned)
+			assert.equal(returned,expected)
 		});
 	})();
 
@@ -91,7 +91,7 @@ var sut = require('../expectCore');
 		var returned = sut2.expectArray(arg); 
 
 		test('should return expected',function() {
-			assert.equal(expected,returned)
+			assert.equal(returned,expected)
 		});
 	})();
 
@@ -103,7 +103,7 @@ var sut = require('../expectCore');
 		var returned = sut2.return(arg); 
 
 		test('should return expected',function() {
-			assert.equal(expected,returned)
+			assert.equal(returned,expected)
 		});
 	})();
 
@@ -130,6 +130,51 @@ var sut = require('../expectCore');
 
 		test('should return self',function() {
 			assert.equal(returned,sut2);
+		});
+	})();
+
+	(function() {
+		console.log('repeat');
+		var expected = {};
+		var times = 2;
+		var returnContext = {};
+		var repeatMock = newMock();
+		_return.expectAnything().expect(index+1).expect(mockContext).whenCalled(onReturn).return(returnContext);
+		
+		function onReturn(returnValue) {
+			if (returnValue !== undefined)
+				throw new Error('unexpected argument');
+		}
+
+		returnContext.repeat = repeatMock;
+		repeatMock.expect(times).return(expected);
+
+		var returned = sut2.repeat(times); 
+
+		test('should return expected',function() {
+			assert.equal(returned,expected)
+		});
+	})();
+
+	(function() {
+		console.log('repeatAny');
+		var expected = {};
+		var returnContext = {};
+		var repeatMock = newMock();
+		_return.expectAnything().expect(index+1).expect(mockContext).whenCalled(onReturn).return(returnContext);
+		
+		function onReturn(returnValue) {
+			if (returnValue !== undefined)
+				throw new Error('unexpected argument');
+		}
+
+		returnContext.repeatAny = repeatMock;
+		repeatMock.expect().return(expected);
+
+		var returned = sut2.repeatAny(); 
+
+		test('should return expected',function() {
+			assert.equal(returned,expected)
 		});
 	})();
 

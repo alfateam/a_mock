@@ -35,6 +35,14 @@ function expect(hasCorrectArgument,index,mockContext) {
 		return c;
 	};
 
+	c.repeat = function(times) {
+		return _return(undefined,index+1,mockContext).repeat(times);
+	};
+
+	c.repeatAny = function() {
+		return _return(undefined,index+1,mockContext).repeatAny();
+	};
+
 	return c;
 }
 

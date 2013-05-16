@@ -235,5 +235,180 @@ function fallback(arg,arg2)
 		assert.ok(sut.verify());
 	});
 
+	test('it should return void for unspecified return',function() {
+		var sut = newSut(fallback);
+
+		function fallback() {
+			if (arguments.length != 0)
+				throw 'expected no args';
+			return fallbackValue;
+		}
+
+		sut.expect();
+		var returned = sut();		
+		var returned2 = sut();
+
+		assert.deepEqual(returned,undefined);
+		assert.equal(returned2,fallbackValue);
+		assert.ok(sut.verify());
+	});
+
+	test('it should return void with multiple args for unspecified return',function() {
+		var sut = newSut(fallback);
+		var arg = 'a';
+		function fallback() {
+			if (arguments.length != 0)
+				throw 'expected no args';
+			return fallbackValue;
+		}
+
+		sut.expect(arg);
+		var returned = sut();		
+		var returned2 = sut(arg);
+		
+		assert.equal(returned,fallbackValue);
+		assert.deepEqual(returned2,undefined);
+		assert.ok(sut.verify());
+	});
+
+	test('it should return void for unspecified return, expectAnything',function() {
+		var sut = newSut(fallback);
+
+		function fallback() {
+			if (arguments.length != 0)
+				throw 'expected no args';
+			return fallbackValue;
+		}
+
+		sut.expectAnything();
+		var returned = sut('foo');		
+		var returned2 = sut();
+
+		assert.deepEqual(returned,undefined);
+		assert.equal(returned2,fallbackValue);
+		assert.ok(sut.verify());
+	});
+
+	test('it should return void for unspecified return, expectArray',function() {
+		var sut = newSut(fallback);
+		var a = {}, b = {};
+		function fallback() {
+			if (arguments.length != 0)
+				throw 'expected no args';
+			return fallbackValue;
+		}
+
+		sut.expectArray([a,b]);
+		var returned = sut([a,b]);		
+		var returned2 = sut();
+
+		assert.deepEqual(returned,undefined);
+		assert.equal(returned2,fallbackValue);
+		assert.ok(sut.verify());
+	});
+
+	test('it should return void for unspecified return, expect, repeat twice',function() {
+		var sut = newSut(fallback);
+
+		function fallback() {
+			if (arguments.length != 1)
+				throw 'expected one arg';
+			return fallbackValue;
+		}
+
+		sut.expect().repeat(2);
+		var returned = sut('foo');		
+		var returned2 = sut();
+		var returned3 = sut();
+
+		assert.equal(returned,fallbackValue);
+		assert.deepEqual(returned2,undefined);
+		assert.deepEqual(returned3,undefined);
+		assert.ok(sut.verify());
+	});
+
+		test('it should return void for unspecified return, expect, repeat any',function() {
+		var sut = newSut(fallback);
+
+		function fallback() {
+			if (arguments.length != 1)
+				throw 'expected one arg';
+			return fallbackValue;
+		}
+
+		sut.expect().repeatAny();
+		var returned = sut('foo');		
+		var returned2 = sut();
+
+		assert.deepEqual(returned2,undefined);
+		assert.equal(returned,fallbackValue);
+		assert.ok(sut.verify());
+	});
+
+	test('it should return void for unspecified return, expect one arg, repeat twice',function() {
+		var sut = newSut(fallback);
+		var arg = {};
+		
+		function fallback() {
+			if (arguments.length != 1)
+				throw 'expected one arg';
+			return fallbackValue;
+		}
+
+		sut.expect(arg).repeat(2);
+		var returned = sut(arg);		
+		var returned2 = sut(arg);
+		var returned3 = sut(arg);
+
+		assert.deepEqual(returned,undefined);
+		assert.deepEqual(returned2,undefined);
+		assert.equal(returned3,fallbackValue);
+		assert.ok(sut.verify());
+	});
+
+	test('it should return void for unspecified return, expect one arg, repeat any',function() {
+		var sut = newSut(fallback);
+		var arg = {};
+		
+		function fallback() {
+		}
+
+		sut.expect(arg).repeatAny();
+		var returned = sut(arg);		
+		var returned2 = sut(arg);
+
+		assert.deepEqual(returned,undefined);
+		assert.deepEqual(returned2,undefined);
+		assert.ok(sut.verify());
+	});
+
+	test('it should return void for unspecified return, expect one arg, whenCalled ',function() {
+		var sut = newSut(fallback);
+		var arg = {};
+		var didInvoke;
+		var fallbackValue = {};
+
+		function fallback(theArg) {
+			if (theArg !== arg)
+				throw new Error('unexpected argument');
+			return fallbackValue;
+		}
+
+		sut.expect(arg).whenCalled(onCalled);
+
+		function onCalled(theArg) {
+			if (theArg !== arg)
+				throw new Error('unexpected argument');
+			didInvoke = true;
+		}
+
+		var returned = sut(arg);		
+		var returned2 = sut(arg);
+
+		assert.deepEqual(returned,undefined);
+		assert.deepEqual(returned2,fallbackValue);
+		assert.ok(didInvoke);
+		assert.ok(sut.verify());
+	});
 
 })();

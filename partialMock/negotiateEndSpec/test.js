@@ -10,7 +10,7 @@ var sut = require('../negotiateEnd');
 console.log('negotiateEnd');
 
 	(function() {
-		console.log('pending.when execute');
+		console.log('2 args pending.when execute');
 		var numberOfArgs = 2;
 		var didCallReturn;
 		mockContext.numberOfArgs = numberOfArgs;
@@ -29,6 +29,26 @@ console.log('negotiateEnd');
 		});
 	})();
 
+
+(function() {
+		console.log('0 args pending.when execute');
+		var numberOfArgs = 0;
+		var didCallReturn;
+		mockContext.numberOfArgs = numberOfArgs;
+		_return.expectAnything().expect(numberOfArgs).expect(mockContext).whenCalled(onReturn).return();
+
+		function onReturn(arg) {
+			if (arg !== undefined)
+				throw new Error('expected undefined but was ' + arg);
+			didCallReturn = true;
+		}
+		
+		sut(mockContext);
+
+		test('it should set void as returnValue', function() {
+			assert.ok(didCallReturn);
+		});
+	})();
 
 
 

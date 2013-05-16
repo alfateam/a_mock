@@ -16,6 +16,14 @@ function expectEmpty(mockContext) {
 		return c;
 	};
 
+	c.repeat = function(times) {
+		return _return(undefined,0,mockContext).repeat(times);
+	};
+
+	c.repeatAny = function() {
+		return _return(undefined,0,mockContext).repeatAny();
+	};
+
 	return c;
 }
 
