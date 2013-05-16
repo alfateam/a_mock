@@ -1,4 +1,5 @@
 var assert = require('assert');
+var test = require('../../test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -9,7 +10,8 @@ var newHasNoMoreArguments = newRequireMock('./newHasNoMoreArguments');
 var sut = require('../expectEmpty');
 
 
-describe('expectEmpty', function(){
+(function() {
+	console.log('expectEmpty');
 	var mockContext = {};
 	var compositeAreCorrectArguments = newMock();
 	var whenCalledEmitter = {}	;
@@ -46,26 +48,33 @@ describe('expectEmpty', function(){
 
 	var sut2 = sut(mockContext);
 
-	it('should add hasNoMoreArguments to compositeAreCorrectArguments',function() {
+	test('it should set mockContext.NumberOfArgs to zero',function() {
+		assert.ok(mockContext.numberOfArgs === 0); 
+	});
+
+
+	test('it should add hasNoMoreArguments to compositeAreCorrectArguments',function() {
 		assert.ok(didAdd);
 	});
 
-	it('should set mockContext.whenCalledEmitter',function() {
+	test('it should set mockContext.whenCalledEmitter',function() {
 		assert.equal(mockContext.whenCalledEmitter,whenCalledEmitter);
 	});
 
-	describe('return',function() {
+	(function() {
+		console.log('return');
 		var expected = {};
 		var arg = {};
 		_return.expect(arg).expect(index).expect(mockContext).return(expected);
 		var returned = sut2.return(arg); 
 
-		it('should return expected',function() {
+		test('it should return expected',function() {
 			assert.equal(expected,returned)
 		});
-	});
+	})();
 
-	describe('whenCalled',function() {
+	(function() {
+		console.log('whenCalled');
 		var callback = {};
 		var expected;
 		var add = newMock();
@@ -81,13 +90,13 @@ describe('expectEmpty', function(){
 				
 		var returned = sut2.whenCalled(callback); 
 
-		it('should add callback to whenCalledEmitter',function() {
+		test('it should add callback to whenCalledEmitter',function() {
 			assert.ok(didAddCallback)
 		});
 
-		it('should return self',function() {
+		test('it should return self',function() {
 			assert.equal(returned,sut2);
 		});
-	});
+	})();
 
-});
+})();

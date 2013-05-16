@@ -8,6 +8,7 @@ function expect(hasCorrectArgument,index,mockContext) {
 
 	var c = {};
 	mockContext.compositeAreCorrectArguments.add(hasCorrectArgument);
+	mockContext.numberOfArgs = index+1;
 
 	c.expect = function() {
 		var args = [index+1,mockContext];

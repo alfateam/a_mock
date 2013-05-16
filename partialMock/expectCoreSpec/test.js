@@ -1,4 +1,5 @@
 var assert = require('assert');
+var test = require('../../test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -11,7 +12,8 @@ var newWhenCalledEmitter = newRequireMock('../eventEmitter');
 var sut = require('../expectCore');
 
 
-describe('expectCore', function(){
+(function(){
+	console.log('expectCore');
 	var mockContext = {};
 	var compositeAreCorrectArguments = newMock();
 	var whenCalledEmitter = {}	;
@@ -43,61 +45,70 @@ describe('expectCore', function(){
 
 	var sut2 = sut(hasCorrectArgument,index,mockContext);
 
-	it('should add areSameArgument to compositeAreCorrectArguments',function() {
+	test('it should set mockContext.NumberOfArgs to index+1',function() {
+		assert.equal(mockContext.numberOfArgs,index+1); 
+	});
+
+	test('it should add areSameArgument to compositeAreCorrectArguments',function() {
 		assert.ok(didAdd);
 	});
 
-	it('should set mockContext.whenCalledEmitter',function() {
+	test('it should set mockContext.whenCalledEmitter',function() {
 		assert.equal(mockContext.whenCalledEmitter,whenCalledEmitter);
 	});
 
 
-	describe('expect',function() {
+	(function() {
+		console.log('expect');
 		var expected = {};
 		var arg = {};
 		var arg2 = {};
 		expect.expect(index+1).expect(mockContext).expect(arg).expect(arg2).return(expected);
 		var returned = sut2.expect(arg,arg2); 
 
-		it('should return expected',function() {
+		test('should return expected',function() {
 			assert.equal(expected,returned)
 		});
-	});
+	})();
 
-	describe('expectAnything',function() {
+	(function() {
+		console.log('expectAnything');
 		var expected = {};
 		var arg = {};
 		expectAnything.expect(index+1).expect(mockContext).return(expected);
 		var returned = sut2.expectAnything(); 
 
-		it('should return expected',function() {
+		test('should return expected',function() {
 			assert.equal(expected,returned)
 		});
-	});
+	})();
 
-	describe('expectArray',function() {
+	(function() {
+		console.log('expectArray');
 		var expected = {};
 		var arg = {};		
 		expectArray.expect(index+1).expect(mockContext).expect(arg).return(expected);
 		var returned = sut2.expectArray(arg); 
 
-		it('should return expected',function() {
+		test('should return expected',function() {
 			assert.equal(expected,returned)
 		});
-	});
+	})();
 
-	describe('return',function() {
+	(function() {
+		console.log('return');
 		var expected = {};
 		var arg = {};
 		_return.expect(arg).expect(index+1).expect(mockContext).return(expected);
 		var returned = sut2.return(arg); 
 
-		it('should return expected',function() {
+		test('should return expected',function() {
 			assert.equal(expected,returned)
 		});
-	});
+	})();
 
-	describe('whenCalled',function() {
+	(function() {
+		console.log('whenCalled');
 		var callback = {};
 		var expected;
 		var add = newMock();
@@ -113,13 +124,13 @@ describe('expectCore', function(){
 				
 		var returned = sut2.whenCalled(callback); 
 
-		it('should add callback to whenCalledEmitter',function() {
+		test('should add callback to whenCalledEmitter',function() {
 			assert.ok(didAddCallback)
 		});
 
-		it('should return self',function() {
+		test('should return self',function() {
 			assert.equal(returned,sut2);
 		});
-	});
+	})();
 
-});
+})();

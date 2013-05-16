@@ -1,4 +1,5 @@
 var assert = require('assert');
+var test = require('../../test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -9,7 +10,8 @@ var newHasNoMoreArguments = newRequireMock('./newHasNoMoreArguments');
 
 var sut = require('../return');
 
-describe('return', function(){
+(function(){
+	console.log('return');
 	var mockContext = {};
 	var hasNoMoreArguments = {};
 	var returnValue = 'returnValue';
@@ -30,6 +32,7 @@ describe('return', function(){
 	function stubMockContext() {
 		var compositeTemp = {};
 		mockContext.compositeAreCorrectArguments = compositeTemp;
+		mockContext.numberOfArgs = 2;
 		var add = newMock();
 		compositeTemp.add = add;
 		add.expect(hasNoMoreArguments).return(compositeAreCorrectArguments);
@@ -44,35 +47,43 @@ describe('return', function(){
 	}
 
 	var sut2 = sut(returnValue,index,mockContext);
+
+
+	test('it should set mockContext.numberOfArgs to undefined',function() {
+		assert.ok(mockContext.numberOfArgs === undefined);
+	});
 	
-	it('should set execute',function() {
+	test('it should set execute',function() {
 		assert.ok(didSetExecute);
 	});
 
-	describe('expect',function() {
+	(function() {
+		console.log('expect');
 		var arg = {};
 		var expected = {};
 		expect.expect(arg).expect(0).expect(mockContext).return(expected);
 
 		var returned = sut2.expect(arg);
 
-		it('should return expected',function(){
+		test('it should return expected',function(){
 			assert.equal(expected,returned);
 		});
-	});
+	})();
 
-	describe('expectAnything',function() {
+	(function() {
+		console.log('expectAnything');
 		var expected = {};
 		expectAnything.expect(0).expect(mockContext).return(expected);
 
 		var returned = sut2.expectAnything();
 
-		it('should return expected',function(){
+		test('it should return expected',function(){
 			assert.equal(expected,returned);
 		});
-	});
+	})();
 
-	describe('repeat',function() {
+	(function() {
+		console.log('repeat');
 		var didSetExecute;
 		var expected = {};
 		var times = 2;		
@@ -84,18 +95,19 @@ describe('return', function(){
 
 		var returned = sut2.repeat(times);
 
-		it('should set execute',function() {
+		test('it should set execute',function() {
 			assert.ok(didSetExecute);
 		});
 
-		it('should return self',function() {
+		test('it should return self',function() {
 			assert.equal(returned,sut2);
 		});
 
-	});
+	})();
 
 
-	describe('repeatAny',function() {
+	(function() {
+		console.log('repeatAny');
 		var didSetExecute;
 		var expected = {};
 		setExecute.expect(returnValue).expect(compositeAreCorrectArguments).expect(mockContext).whenCalled(onSetExecuteNTimes).return(null);
@@ -106,16 +118,16 @@ describe('return', function(){
 
 		var returned = sut2.repeatAny();
 
-		it('should set execute',function() {
+		test('it should set execute',function() {
 			assert.ok(didSetExecute);
 		});
 
-		it('should return self',function() {
+		test('it should return self',function() {
 			assert.equal(returned,sut2);
 		});
 
-	});
+	})();
 
 
 
-});
+})();

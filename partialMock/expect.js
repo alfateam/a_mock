@@ -1,4 +1,4 @@
-function expect(index,mockContext) {	
+function expect(index,mockContext) {		
 	var newAreSameArgument = require('./newHasSameArgument');
 	var expectCore = require('./expectCore');
 	var arg = arguments[2];

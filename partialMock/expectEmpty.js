@@ -5,6 +5,7 @@ function expectEmpty(mockContext) {
 	
 	var c = {};
 	mockContext.compositeAreCorrectArguments.add(hasCorrectArgument);
+	mockContext.numberOfArgs = 0;
 
 	c.return = function(arg) {
 		return _return(arg,0,mockContext);

@@ -5,8 +5,9 @@ function _return(returnValue,index,mockContext) {
 	var expectAnything = require('./expectAnything');
 	var oneTime = 1;
 
+	mockContext.numberOfArgs = undefined;
 	var hasNoMoreArguments = newHasNoMoreArguments(index);	
-	var hasCorrectArgs = mockContext.compositeAreCorrectArguments.add(hasNoMoreArguments);
+	var hasCorrectArgs = mockContext.compositeAreCorrectArguments.add(hasNoMoreArguments);	
 	setExecute(returnValue,hasCorrectArgs,mockContext,oneTime);	
 	var c = {};
 

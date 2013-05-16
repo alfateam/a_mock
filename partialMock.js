@@ -1,5 +1,3 @@
-
-
 function create(originalFunc) {
 	var newMockContext = require('./partialMock/newMockContext');
 	var expect = require('./partialMock/expect');
@@ -9,15 +7,16 @@ function create(originalFunc) {
 	var expectEmpty = require('./partialMock/expectEmpty');
 	var newEmptyAnd = require('./newMutableAnd');		
 	var mockContext = newMockContext(originalFunc);
-	
+	var _negotiateEnd = require('./partialMock/negotiateEnd');	
 
-	function mock() {
-		var nothing;
+	function mock() {		
+		negotiateEnd();
 		mockContext.arguments = arguments;		
 		return mockContext.execute.apply(null,arguments);
 	}
 
-	mock.expect = function() {
+	mock.expect = function() {				
+		negotiateEnd();
 		mockContext.compositeAreCorrectArguments = newEmptyAnd();
 		if (arguments.length == 0)
 			return expectEmpty(mockContext);
@@ -29,20 +28,28 @@ function create(originalFunc) {
 	};
 
 	mock.expectAnything = function() {
+		negotiateEnd();//todo negotiateEnd instead
 		mockContext.compositeAreCorrectArguments = newEmptyAnd();
 		var args  = [0,mockContext];
 		return expectAnything.apply(null,args);
 	};
 
 	mock.verify = function() {		
+		negotiateEnd();
 		var args = [mockContext];
 		return verify.apply(null,args);
 	};
 
 	mock.expectArray = function(array) {
+		negotiateEnd();//todo negotiateEnd instead
 		mockContext.compositeAreCorrectArguments = newEmptyAnd();
 		var args = [0,mockContext,array];
 		return expectArray.apply(null,args);
+	}
+
+
+	function negotiateEnd() {
+		_negotiateEnd(mockContext);
 	}
 	
 	return mock;

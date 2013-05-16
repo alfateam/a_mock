@@ -1,3 +1,4 @@
+var test = require('../test');
 var assert = require('assert');
 var newMock = require('../partialMock/simple/newMock');
 var newRequireMock = require('../partialMock/simple/newRequireMock');
@@ -9,12 +10,14 @@ var verify = newRequireMock('./partialMock/verify');
 var expectEmpty = newRequireMock('./partialMock/expectEmpty');
 var expectArray = newRequireMock('./partialMock/expectArray');
 var newMutableAnd = newRequireMock('./newMutableAnd')
+var negotiateEnd =newRequireMock('./partialMock/negotiateEnd');
 var newSut = require('../partialMock');
 var mutableAnd = {};
 
 function fallback() {}
 
-describe('partialMock', function(){
+(function () {
+	console.log('partialMock');	
 	var sut;
 	var fallbackMock;
 	var mockContext;
@@ -30,101 +33,169 @@ describe('partialMock', function(){
 	}
 	createSut();
 
-	describe('execute',function() {
+	(function() {		
+		console.log('when execute ');		
 		var arg = {};
 		var expected = {};		
 		var execute = newMock();
+		var didNegotiateEnd;
 		execute.expect(arg).return(expected);
 		mockContext.execute = execute;
+		negotiateEnd.expect(mockContext).whenCalled(onNegotiateEnd).return();
 		var returned = sut(arg);
 
-		it('should return expected',function() {
+		function onNegotiateEnd() {
+			didNegotiateEnd = true;
+		}
+
+		test('should negotiateEnd', function() {
+			assert.ok(didNegotiateEnd);
+		});
+
+		test('should return expected',function() {
 			assert.equal(expected,returned);
 		});
 
-	});
+	})();
 	
 
-	describe('expect',function() {
+	(function() {
+		console.log('when execute');
 		var expected = {};
 		mockContext.compositeAreCorrectArguments = null;
 		var arg = 'arg';
 		var arg2 = 'arg2';
+		var didNegotiateEnd;
 		newMutableAnd.expect().return(mutableAnd);
 		expect.expect(0).expect(mockContext).expect(arg).expect(arg2).return(expected);
+		negotiateEnd.expect(mockContext).whenCalled(onNegotiateEnd).return();
 		var returned = sut.expect(arg,arg2); 
 
-		it('should set mockContext.compositeAreCorrectArguments to mutableAnd',function() {
+		function onNegotiateEnd() {
+			didNegotiateEnd = true;
+		}
+
+		test('it should negotiateEnd', function() {
+			assert.ok(didNegotiateEnd);
+		});
+
+		test('should set mockContext.compositeAreCorrectArguments to mutableAnd',function() {
 			assert.equal(mutableAnd,mockContext.compositeAreCorrectArguments);
 		});
 
-		it('should return expected',function() {
+		test('should return expected',function() {
 			assert.equal(expected,returned)
 		});
 
 
-	});
+	})();
 
-	describe('expect empty',function() {
+	(function() {
+		console.log('when expect empty');
 		var expected = {};
+		var didNegotiateEnd;
 		mockContext.compositeAreCorrectArguments = null;
 		newMutableAnd.expect().return(mutableAnd);
 		expectEmpty.expect(mockContext).return(expected);
+		negotiateEnd.expect(mockContext).whenCalled(onNegotiateEnd).return();
+
 		var returned = sut.expect(); 
+
+				function onNegotiateEnd() {
+			didNegotiateEnd = true;
+		}
+
+		test('should negotiateEnd', function() {
+			assert.ok(didNegotiateEnd);
+		});
 		
-		it('should set mockContext.compositeAreCorrectArguments to mutableAnd',function() {
+		test('should set mockContext.compositeAreCorrectArguments to mutableAnd',function() {
 			assert.equal(mutableAnd,mockContext.compositeAreCorrectArguments);
 		});
 
-		it('should return expected',function() {
+		test('should return expected',function() {
 			assert.equal(expected,returned)			
 		});
 
-	});
+	})();
 
 
-	describe('expectAnything',function() {
+	(function() {
+		console.log('when expectAnything');
 		var expected = {};
+		var didNegotiateEnd;
 		mockContext.compositeAreCorrectArguments = null;
 		newMutableAnd.expect().return(mutableAnd);
 		expectAnything.expect(0).expect(mockContext).return(expected);
+		negotiateEnd.expect(mockContext).whenCalled(onNegotiateEnd).return();
 		var returned = sut.expectAnything(); 
 
-		it('should set mockContext.compositeAreCorrectArguments to mutableAnd',function() {
+		function onNegotiateEnd() {
+			didNegotiateEnd = true;
+		}
+
+		test('should negotiateEnd', function() {
+			assert.ok(didNegotiateEnd);
+		});
+
+		test('should set mockContext.compositeAreCorrectArguments to mutableAnd',function() {
 			assert.equal(mutableAnd,mockContext.compositeAreCorrectArguments);
 		});
 
-		it('should return expected',function() {
+		test('should return expected',function() {
 			assert.equal(expected,returned)
 		});
-	});
+	})();
 
-	describe('verify',function() {
+	(function() {
+		console.log('when verify');
 		var expected = {};
+		var didNegotiateEnd;
 		verify.expect(mockContext).return(expected);
+		negotiateEnd.expect(mockContext).whenCalled(onNegotiateEnd).return();
 		var returned = sut.verify();
 
-		it('should return expected',function() {
+		function onNegotiateEnd() {
+			didNegotiateEnd = true;
+		}
+
+		test('should negotiateEnd',function() {
+			assert.ok(didNegotiateEnd);
+		});
+
+		test('should return expected',function() {
 			assert.equal(expected,returned)
 		});
-	});
+	})();
 
-	describe('expectArray',function() {
+	(function() {
+		console.log('when expectArray');
 		var expected = {};		
+		var didNegotiateEnd;
 		mockContext.compositeAreCorrectArguments = null;
 		var array = [];		
 		newMutableAnd.expect().return(mutableAnd);
 		expectArray.expect(0).expect(mockContext).expect(array).return(expected);
+		negotiateEnd.expect(mockContext).whenCalled(onNegotiateEnd).return();
 		var returned = sut.expectArray(array); 
 
-		it('should set mockContext.compositeAreCorrectArguments to mutableAnd',function() {
+		function onNegotiateEnd() {
+			didNegotiateEnd = true;
+		}
+
+		test('should negotiateEnd', function() {
+			assert.ok(didNegotiateEnd);
+		});
+
+
+		test('should set mockContext.compositeAreCorrectArguments to mutableAnd',function() {
 			assert.equal(mutableAnd,mockContext.compositeAreCorrectArguments);
 		});
 
-		it('should return expected',function() {
+		test('should return expected',function() {
 			assert.equal(expected,returned)
 		});
-	});
+	})();
 
 
-});
+})();
