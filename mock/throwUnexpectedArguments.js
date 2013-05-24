@@ -4,7 +4,7 @@ function throwUnexpectedArguments() {
 	{
 		msg = msg + ' ' + arguments[i];
 	}
-	throw msg + '.';
+	throw new Error(msg + '.');
 }
 
 module.exports = throwUnexpectedArguments;
