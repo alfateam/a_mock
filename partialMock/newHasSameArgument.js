@@ -1,6 +1,9 @@
+var isEqualArg = require('./hasSameArgument/isEqualArg');
+
 function _new(expectedArg,index) {
 	function hasSameArgument(){
-		return arguments[index] === expectedArg;
+		return arguments.length > index && 
+				isEqualArg(expectedArg,arguments[index]);
 	}
 
 	return hasSameArgument;

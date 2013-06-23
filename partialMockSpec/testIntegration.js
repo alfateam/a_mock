@@ -81,7 +81,7 @@ function fallback(arg,arg2)
 		var element2 = 'b';
 		var expected = {};
 		var sut = newSut(fallback);
-		sut.expectArray([element1,element2]).return(expected);
+		sut.expect([element1,element2]).return(expected);
 		var returned = sut([element1,element2]);
 		var returned2 = sut([element1,element2]);
 		assert.equal(returned,expected);
@@ -298,7 +298,7 @@ function fallback(arg,arg2)
 			return fallbackValue;
 		}
 
-		sut.expectArray([a,b]);
+		sut.expect([a,b]);
 		var returned = sut([a,b]);		
 		var returned2 = sut();
 
