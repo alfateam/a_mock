@@ -33,6 +33,11 @@ function fallback() {}
 	}
 	createSut();
 
+	
+	test('should set ignore as alias for expectAnything', function() {
+		assert.equal(c.sut.ignore,c.sut.expectAnything);
+	});	
+
 	(function() {		
 		console.log('when execute ');		
 		var arg = {};

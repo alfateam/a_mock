@@ -4,8 +4,6 @@ var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
 var setExecute = newRequireMock('./setExecute');
-var expect  = newRequireMock('./expect');
-var expectAnything  = newRequireMock('./expectAnything');
 var newHasNoMoreArguments = newRequireMock('./newHasNoMoreArguments');
 
 var sut = require('../return');
@@ -56,31 +54,6 @@ var sut = require('../return');
 	test('it should set execute',function() {
 		assert.ok(didSetExecute);
 	});
-
-	(function() {
-		console.log('expect');
-		var arg = {};
-		var expected = {};
-		expect.expect(arg).expect(0).expect(mockContext).return(expected);
-
-		var returned = sut2.expect(arg);
-
-		test('it should return expected',function(){
-			assert.equal(expected,returned);
-		});
-	})();
-
-	(function() {
-		console.log('expectAnything');
-		var expected = {};
-		expectAnything.expect(0).expect(mockContext).return(expected);
-
-		var returned = sut2.expectAnything();
-
-		test('it should return expected',function(){
-			assert.equal(expected,returned);
-		});
-	})();
 
 	(function() {
 		console.log('repeat');

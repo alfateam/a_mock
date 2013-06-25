@@ -57,6 +57,9 @@ var sut = require('../expectCore');
 		assert.equal(mockContext.whenCalledEmitter,whenCalledEmitter);
 	});
 
+	test('should set ignore as alias for expectAnything', function() {
+		assert.equal(sut2.ignore,sut2.expectAnything);
+	});	
 
 	(function() {
 		console.log('expect');

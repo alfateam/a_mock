@@ -28,11 +28,13 @@ function create(originalFunc) {
 	};
 
 	mock.expectAnything = function() {
-		negotiateEnd();//todo negotiateEnd instead
+		negotiateEnd();
 		mockContext.compositeAreCorrectArguments = newEmptyAnd();
 		var args  = [0,mockContext];
 		return expectAnything.apply(null,args);
 	};
+
+	mock.ignore = expectAnything;
 
 	mock.verify = function() {		
 		negotiateEnd();
