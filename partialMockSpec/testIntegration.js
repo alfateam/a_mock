@@ -76,6 +76,25 @@ function fallback(arg,arg2)
 		assert.equal(returned2,fallbackValue);
 	});
 
+	test('it should throw for correct arg',function() {
+		var arg = 'a';
+		var error = {};
+		var expected = {};
+		var sut = newSut();
+		sut.expect(arg).throw(error);
+		sut.expect(arg).return(expected);
+		try	{		
+			sut(arg);
+		}
+		catch (e) {
+			thrown = e;
+		}
+
+		var returned2 = sut(arg);
+		assert.equal(error,thrown);
+		assert.equal(returned2,expected);
+	});
+
 	test('it should return expected for expected array',function() {
 		var element1 = 'a';
 		var element2 = 'b';
@@ -179,7 +198,7 @@ function fallback(arg,arg2)
 		assert.ok(sut.verify());
 	});
 
-	test('it should return expected for arg, anything',function() {
+	test('it should return expected for arg, anything, ignore',function() {
 		var arg = 'a';
 		var arg2 = 'b';
 		var arg3;
@@ -187,7 +206,7 @@ function fallback(arg,arg2)
 		var sut = newSut(fallback);
 
 
-		sut.expect(arg).expectAnything().expectAnything().return(expected);
+		sut.expect(arg).expectAnything().ignore().return(expected);
 		var returned = sut(arg,arg2,arg3);		
 		var returned2 = sut(arg,arg2,arg3);
 

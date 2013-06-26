@@ -3,6 +3,7 @@ function expect(hasCorrectArgument,index,mockContext) {
 	var expectAnything = require('./expectAnything');
 	var expectArray = require('./expectArray');
 	var _return = require('./return');
+	var newThrow = require('./newThrow');
 	mockContext.whenCalledEmitter = require('../eventEmitter')();
 
 
@@ -39,6 +40,11 @@ function expect(hasCorrectArgument,index,mockContext) {
 
 	c.repeat = function(times) {
 		return _return(undefined,index+1,mockContext).repeat(times);
+	};
+
+	c.throw = function(error) {
+		var _throw = newThrow(error);
+		return c.whenCalled(_throw);	
 	};
 
 	c.repeatAny = function() {

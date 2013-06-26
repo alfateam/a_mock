@@ -8,7 +8,7 @@ var expectAnything = newRequireMock('./expectAnything');
 var expectArray = newRequireMock('./expectArray');
 var _return = newRequireMock('./return');
 var newWhenCalledEmitter = newRequireMock('../eventEmitter');
-
+var newThrow = newRequireMock('./newThrow');
 var sut = require('../expectCore');
 
 
@@ -135,6 +135,22 @@ var sut = require('../expectCore');
 			assert.equal(returned,sut2);
 		});
 	})();
+
+	(function() {
+		console.log('throw');
+		var error = {};
+		var _throw = {};
+		var expected = {};
+		newThrow.expect(error).return(_throw);				
+		sut2.whenCalled = newMock();
+		sut2.whenCalled.expect(_throw).return(expected);
+		var returned = sut2.throw(error); 
+
+		test('should return expected',function() {
+			assert.equal(expected,returned);
+		});
+	})();
+
 
 	(function() {
 		console.log('repeat');
