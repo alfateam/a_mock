@@ -1,3 +1,5 @@
+var newThrow = require('./newThrow');
+
 function expectEmpty(mockContext) {
 	var _return = require('./return');
 	mockContext.whenCalledEmitter = require('../eventEmitter')();
@@ -14,6 +16,11 @@ function expectEmpty(mockContext) {
 	c.whenCalled = function(callback) {
 		mockContext.whenCalledEmitter.add(callback);
 		return c;
+	};
+
+	c.throw = function(error) {
+		var _throw = newThrow(error);
+		return c.whenCalled(_throw);
 	};
 
 	c.repeat = function(times) {

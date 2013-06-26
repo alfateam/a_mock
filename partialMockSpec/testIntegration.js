@@ -95,6 +95,24 @@ function fallback(arg,arg2)
 		assert.equal(returned2,expected);
 	});
 
+	test('it should throw for void arg',function() {
+		var error = {};
+		var expected = {};
+		var sut = newSut();
+		sut.expect().throw(error);
+		sut.expect().return(expected);
+		try	{		
+			sut();
+		}
+		catch (e) {
+			thrown = e;
+		}
+
+		var returned2 = sut();
+		assert.equal(error,thrown);
+		assert.equal(returned2,expected);
+	});
+
 	test('it should return expected for expected array',function() {
 		var element1 = 'a';
 		var element2 = 'b';
