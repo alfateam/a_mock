@@ -43,7 +43,7 @@ function create(originalFunc) {
 	};
 
 	mock.expectArray = function(array) {
-		negotiateEnd();//todo negotiateEnd instead
+		negotiateEnd();
 		mockContext.compositeAreCorrectArguments = newEmptyAnd();
 		var args = [0,mockContext,array];
 		return expectArray.apply(null,args);
