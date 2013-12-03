@@ -6,9 +6,10 @@ var mock = require('../mock');
 	Object.keys(require.cache).forEach(function(key) { delete require.cache[key]; });
 })();
 
+console.log('mock');
 
 (function(){
-	console.log('mock');
+	console.log('an object');
 	var realName = 'Alfonzo';
 	function newCustomer() {
 
@@ -44,5 +45,32 @@ var mock = require('../mock');
 	test('it verify should return true',function() {
 		assert.ok(customerMock.verify());
 	});
+
+})();
+
+
+(function foo(){
+	console.log('violating function throws with minium stack trace');
+
+	var sut = mock();
+	var error;
+	var expectedTrace;
+	try {
+		/*var error = new Error('foo');
+		
+		console.log(expectedTrace);
+		*/sut();
+
+	}
+	catch(e) {
+		error = e; 
+		
+	 console.log(error.stack);
+	}
+
+	test('throws with minimum stack trace',function() {
+		assert.equal('som error msg',error);
+	});
+
 
 })();
