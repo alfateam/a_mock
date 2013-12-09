@@ -55,11 +55,60 @@ console.log('mock');
 	var sut = mock();
 	var error;
 	var expectedTrace;
+
+	var red, green, reset;
+	red   = '\u001b[31m';
+	green = '\u001b[32m';
+	reset = '\u001b[0m';
+
+	var err = new Error;
+  	err.name = 'MockError';
+  	err.message = 'unexpected arguments 1,2';
+  	
+  	try {
+  		throw err;
+  	}
+  	catch(e) {
+  		
+  		var lines = e.stack.split('\n');
+
+		lines.splice(0,3);
+	
+		var stack = lines.join('\n');
+
+  		err.stack = e.name + ': ' + e.message + '\n' + stack;
+  	}
+
+  	//console.log(stack);
+  	//err.stack = err.name + ': ' + err.message + '\n' + '    at stack 1\n    at 2\n    at 3';
+
+
+  
+  //Error.captureStackTrace(err, arguments.callee);
+  try {
+  	throw err;
+  }
+  catch(e) {
+  	console.log(e.stack);
+  }
+
+  try {
+  	var c = new undefined;
+  }
+  catch(e) {
+  	console.log(e.stack);
+  }
+  //this.error(err.stack);
+  /*
+	var error = new Error('foo bar.');
+	error.message = 'msg';
+	error.stack = 'this is trace.';
+	throw error;
 	try {
-		/*var error = new Error('foo');
+		var error = new Error('foo');
 		
 		console.log(expectedTrace);
-		*/sut();
+		sut();
 
 	}
 	catch(e) {
@@ -71,6 +120,6 @@ console.log('mock');
 	test('throws with minimum stack trace',function() {
 		assert.equal('som error msg',error);
 	});
-
+*/
 
 })();
