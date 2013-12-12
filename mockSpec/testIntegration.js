@@ -59,7 +59,6 @@ console.log('mock');
   		sut();
   	}
   	catch(e) {
-
   		lines = e.stack.split('\n');
   	}
 
@@ -86,7 +85,7 @@ console.log('mock');
   		sut.expect(2);
   		sut();
   	}
-  	catch(e) {
+  	catch(e) {  		
   		lines = e.stack.split('\n');
   	}
 

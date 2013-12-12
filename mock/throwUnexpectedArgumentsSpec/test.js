@@ -16,6 +16,7 @@ var thrownName;
 	catch(error) {
 		thrownErrorMsg = error.message;
 		thrownName = error.name;
+		thrownStack = error.stack;
 	}
 
 	test('it should throw correct msg', function(){
@@ -25,4 +26,10 @@ var thrownName;
     test('it should throw correct name', function(){
 		assert.equal('Mock Error',thrownName);
     });
+
+    test('it should have stack', function(){
+		assert.ok(thrownStack);
+    });
+
+
 })();

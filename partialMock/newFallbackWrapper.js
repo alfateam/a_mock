@@ -1,3 +1,5 @@
+var getStackTrace = require('./fallbackWrapper/getStackTrace');
+
 function _new(originalFallback) {
 
 	var fallback = originalFallback;
@@ -8,9 +10,8 @@ function _new(originalFallback) {
 			return fallback.apply(null,arguments);	
 		}
 		catch (e) {			
-			if (e.name = 'Mock Error') {
-  				e.stack = e.name + ': ' + e.message + '\n' + trace();
-
+			if (e.name == 'Mock Error') {
+  				e.stack = e.name + ': ' + e.message + '\n' + getStackTrace();
 			}
 			throw e;
 		}
@@ -23,19 +24,6 @@ function _new(originalFallback) {
 	execute.setFallback = function(fallback2) {
 		fallback = fallback2;
 	};
-
-	function trace() {
-		try	{
-			throw new Error();
-
-		}
-		catch(e) {
-			var lines = e.stack.split('\n');				
-			lines.splice(0,4);
-			var stack = lines.join('\n');
-			return stack;
-		}
-	}
 
 	return execute;
 }
