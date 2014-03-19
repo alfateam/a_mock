@@ -7,13 +7,23 @@ function execute(returnValue,fallback,hasCorrectArguments,mockContext,shouldDecr
 		args.push(arguments[index]);
 		index++;
 	}
+	var expectedCallbacks = mockContext.expectedCallbacks;
+	mockContext.expectedCallbacks = [];
 	if (hasCorrectArguments.apply(null,args)) {
 		negotiateDecrementExpectCount(shouldDecrementExpectCount,mockContext);
 		whenCalledEmitter.emit.apply(null,args);
+		runExpectedCallbacks(expectedCallbacks, args);
+
 		return returnValue;
 	}
 		
 	return fallback.apply(null,args);
+}
+
+function runExpectedCallbacks(callbacks, args) {
+	for(var i in callbacks) {
+		callbacks[i].apply(null, args);
+	}
 }
 
 module.exports = execute;

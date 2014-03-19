@@ -6,11 +6,11 @@ var newRequireMock = require('../simple/newRequireMock');
 var expect  = newRequireMock('./expect');
 var expectAnything = newRequireMock('./expectAnything');
 var expectArray = newRequireMock('./expectArray');
+var expectCallback = newRequireMock('./expectCallback');
 var _return = newRequireMock('./return');
 var newWhenCalledEmitter = newRequireMock('../eventEmitter');
 var newThrow = newRequireMock('./newThrow');
 var sut = require('../expectCore');
-
 
 (function(){
 	console.log('expectCore');
@@ -83,6 +83,19 @@ var sut = require('../expectCore');
 
 		test('should return expected',function() {
 			assert.equal(returned,expected)
+		});
+	})();
+
+	(function() {
+		console.log('expectCallback');
+		var expected = {};
+		var callback = {};
+		expectCallback.expect(index+1).expect(mockContext).expect(callback).return(expected);
+
+		var returned = sut2.expectCallback(callback);
+
+		test('it should return expected', function() {
+			assert.equal(returned, expected);
 		});
 	})();
 
@@ -196,5 +209,4 @@ var sut = require('../expectCore');
 			assert.equal(returned,expected)
 		});
 	})();
-
 })();

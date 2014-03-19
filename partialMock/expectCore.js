@@ -2,6 +2,7 @@ function expect(hasCorrectArgument,index,mockContext) {
 	var expect = require('./expect');
 	var expectAnything = require('./expectAnything');
 	var expectArray = require('./expectArray');
+	var expectCallback = require('./expectCallback');
 	var _return = require('./return');
 	var newThrow = require('./newThrow');
 	mockContext.whenCalledEmitter = require('../eventEmitter')();
@@ -36,6 +37,10 @@ function expect(hasCorrectArgument,index,mockContext) {
 	c.whenCalled = function(callback) {
 		mockContext.whenCalledEmitter.add(callback);
 		return c;
+	};
+
+	c.expectCallback = function(callback) {
+		return expectCallback(index+1, mockContext, callback);
 	};
 
 	c.repeat = function(times) {

@@ -3,10 +3,12 @@ function create(originalFunc) {
 	var expect = require('./partialMock/expect');
 	var expectAnything = require('./partialMock/expectAnything');
 	var expectArray = require('./partialMock/expectArray');
+	var expectCallback = require('./partialMock/expectCallback');
 	var verify = require('./partialMock/verify');
 	var expectEmpty = require('./partialMock/expectEmpty');
 	var newEmptyAnd = require('./newMutableAnd');		
 	var mockContext = newMockContext(originalFunc);
+	var newEventEmitter = require('./eventEmitter');
 	var _negotiateEnd = require('./partialMock/negotiateEnd');	
 
 	function mock() {		
@@ -17,6 +19,7 @@ function create(originalFunc) {
 
 	mock.expect = function() {				
 		negotiateEnd();
+		mockContext.whenCalledEmitter = newEventEmitter();
 		mockContext.compositeAreCorrectArguments = newEmptyAnd();
 		if (arguments.length == 0)
 			return expectEmpty(mockContext);
@@ -29,12 +32,13 @@ function create(originalFunc) {
 
 	mock.expectAnything = function() {
 		negotiateEnd();
+		mockContext.whenCalledEmitter = newEventEmitter();
 		mockContext.compositeAreCorrectArguments = newEmptyAnd();
 		var args  = [0,mockContext];
 		return expectAnything.apply(null,args);
 	};
 
-	mock.ignore = expectAnything;
+	mock.ignore = mock.expectAnything;
 
 	mock.verify = function() {		
 		negotiateEnd();
@@ -44,11 +48,19 @@ function create(originalFunc) {
 
 	mock.expectArray = function(array) {
 		negotiateEnd();
+		mockContext.whenCalledEmitter = newEventEmitter();
 		mockContext.compositeAreCorrectArguments = newEmptyAnd();
 		var args = [0,mockContext,array];
 		return expectArray.apply(null,args);
 	}
 
+	mock.expectCallback = function(callbackMock) {
+		negotiateEnd();
+		mockContext.whenCalledEmitter = newEventEmitter();
+		mockContext.compositeAreCorrectArguments = newEmptyAnd();
+		var args = [0, mockContext, callbackMock];
+		return expectCallback.apply(null, args);
+	};
 
 	function negotiateEnd() {
 		_negotiateEnd(mockContext);

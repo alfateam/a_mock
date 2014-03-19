@@ -9,6 +9,7 @@ var newMockContext = newRequireMock('./partialMock/newMockContext');
 var verify = newRequireMock('./partialMock/verify');
 var expectEmpty = newRequireMock('./partialMock/expectEmpty');
 var expectArray = newRequireMock('./partialMock/expectArray');
+var expectCallback = newRequireMock('./partialMock/expectCallback');
 var newMutableAnd = newRequireMock('./newMutableAnd')
 var negotiateEnd =newRequireMock('./partialMock/negotiateEnd');
 var newSut = require('../partialMock');
@@ -32,10 +33,9 @@ function fallback() {}
 		sut = newSut(fallback);
 	}
 	createSut();
-
 	
 	test('should set ignore as alias for expectAnything', function() {
-		assert.equal(c.sut.ignore,c.sut.expectAnything);
+		assert.equal(sut.ignore,sut.expectAnything);
 	});	
 
 	(function() {		
@@ -202,5 +202,33 @@ function fallback() {}
 		});
 	})();
 
+	(function() {
+		console.log('when expectCallback');
+		var expected = {};
+		var didNegotiateEnd;
+		mockContext.compositeAreCorrectArguments = null;
+		var callback = {};
+		newMutableAnd.expect().return(mutableAnd);
+		expectCallback.expect(0).expect(mockContext).expect(callback).return(expected);
+		negotiateEnd.expect(mockContext).whenCalled(onNegotiateEnd).return();
+
+		var returned = sut.expectCallback(callback);
+
+		function onNegotiateEnd() {
+			didNegotiateEnd = true;
+		}
+
+		test('it should negotiateEnd', function() {
+			assert.ok(didNegotiateEnd);
+		});
+
+		test('should set mockContext.compositeAreCorrectArguments to mutableAnd',function() {
+			assert.equal(mockContext.compositeAreCorrectArguments, mutableAnd);
+		});
+
+		test('it should return expected', function() {
+			assert.equal(returned, expected);
+		});
+	})();
 
 })();
