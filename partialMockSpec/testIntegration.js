@@ -2,6 +2,7 @@ var assert = require('assert');
 var test = require('../test');
 var newMock = require('../partialMock/simple/newMock');
 var newSut = require('../partialMock');
+var mockCallback = require('../mockCallback');
 
 var fallbackValue = 'fallbackValue';
 
@@ -448,4 +449,63 @@ function fallback(arg,arg2)
 		assert.ok(sut.verify());
 	});
 
+	test('it should return expected and catch callback',function() {
+		var arg = 'a';
+		var callback = mockCallback();
+		var expected = {};
+		var didStoreCallback;
+		var sut = newSut(fallback);
+		sut.expect(arg).expectCallback(callback).return(expected);
+
+		var returned = sut(arg, testFunction);
+		callback();	
+
+		function testFunction() {
+			didStoreCallback = true;
+		}
+
+		assert.equal(returned,expected);
+		assert.ok(didStoreCallback);
+		assert.ok(sut.verify());
+	});
+
+	test('it should return expected and catch callback',function() {
+		var arg = 'a';
+		var callback = mockCallback();
+		var callback2 = mockCallback();
+		var callback3 = mockCallback();
+		var expected = {};
+		var expected2 = {};
+		var expected3 = {};
+		var timesCalledCallback = 0;
+		var timesCalledCallback2 = 0;
+		var sut = newSut(fallback);
+		sut.expect(arg).expectCallback(callback).expectCallback(callback2).return(expected);
+		sut.expect(arg).return(expected2);
+		sut.expect(arg).expectCallback(callback3).return(expected3);
+
+		var returned = sut(arg, testFunction, testFunction2);
+		callback();	
+		callback2();
+
+		var returned2 = sut(arg);
+
+		var returned3 = sut(arg, testFunction);
+		callback3();
+
+		function testFunction() {
+			timesCalledCallback += 1;
+		}
+
+		function testFunction2() {
+			timesCalledCallback2 += 1;
+		}
+
+		assert.equal(returned,expected);
+		assert.equal(returned2,expected2);
+		assert.equal(returned3,expected3);
+		assert.equal(timesCalledCallback, 2);
+		assert.equal(timesCalledCallback2, 1);
+		assert.ok(sut.verify());
+	});
 })();

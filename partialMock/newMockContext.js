@@ -7,6 +7,7 @@ function _new(originalFallback) {
 	mockContext.lastExecute = mockContext.execute;
 	mockContext.compositeAreCorrectArguments = and;
 	mockContext.expectCount = 0;
+	mockContext.expectedCallbacks = [];
 
 	return mockContext;
 }

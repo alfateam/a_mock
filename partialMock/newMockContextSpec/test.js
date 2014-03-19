@@ -38,4 +38,8 @@ var newSut = require('../newMockContext');
 	test('it should set expectCount to zero',function() {
 		assert.equal(sut.expectCount,0);
 	});
+
+	test('it should set expectedCallbacks to empty list', function() {
+		assert.equal(sut.expectedCallbacks.length, 0);
+	});
 })();

@@ -13,6 +13,7 @@ var newRequireMock = require('../simple/newRequireMock');
 		var fallback = newMock();
 		var hasCorrectArguments =  newMock();
 		var mockContext = {};
+
 		var didEmitWhenCalled;		
 		var negotiateDecrementExpectCount = newRequireMock('./negotiateDecrementExpectCount');		
 		var shouldDecrement = {};
@@ -28,7 +29,7 @@ var newRequireMock = require('../simple/newRequireMock');
 		var arg2 = {};
 		hasCorrectArguments.expect(arg).expect(arg2).return(true);
 		mockContext.expectCount = 2;
-		stubWhenCalledEmitter()
+		stubWhenCalledEmitter();
 
 		function stubWhenCalledEmitter() {			
 			var emit = newMock();
@@ -41,11 +42,23 @@ var newRequireMock = require('../simple/newRequireMock');
 			didEmitWhenCalled = true;
 		}
 
+		var didCallCallback;
+		var expectedCallback = newMock();
+		expectedCallback.expect(arg).expect(arg2).whenCalled(onCallbackCalled).return();
+		mockContext.expectedCallbacks = [expectedCallback];
+		function onCallbackCalled() {
+			didCallCallback = true;
+		}
+
 		var returned =  sut(returnValue,fallback,hasCorrectArguments,mockContext,shouldDecrement,whenCalledEmitter,arg,arg2);
 
 		test('it should emit whenCalled',function() {
 			assert.ok(didEmitWhenCalled);
 		});	
+
+		test('it should call expected callbacks', function() {
+			assert.ok(didCallCallback);
+		});
 		
 		test('it should negotiate DecrementExpectCount',function() {
 			assert.ok(didDecrement);
@@ -53,6 +66,10 @@ var newRequireMock = require('../simple/newRequireMock');
 
 		test('it should return returnValue',function() {
 			assert.equal(returnValue,returned);
+		});
+
+		test('it should reset mockContext.expectedCallbacks', function() {
+			assert.equal(mockContext.expectedCallbacks.length, 0);
 		});
 
 	})();
@@ -74,11 +91,17 @@ var newRequireMock = require('../simple/newRequireMock');
 		var expected = {};		
 		fallback.expect(arg).expect(arg2).return(expected);
 		mockContext.expectCount = 2;
+
+		mockContext.expectedCallbacks = [function() {}];
 	
 		var returned =  sut(returnValue,fallback,hasCorrectArguments,mockContext,shouldDecrement,whenCalledEmitter,arg,arg2);
 		
 		test('it should return result from fallback',function() {
 			assert.equal(expected,returned);
+		});
+
+		test('it should reset mockContext.expectedCallbacks', function() {
+			assert.equal(mockContext.expectedCallbacks.length, 0);
 		});
 
 	})();
