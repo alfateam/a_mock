@@ -48,11 +48,18 @@ var bazFake = {};
 		console.log('require');
 		sut('./foo').return(fooFake);
 		sut.clear();
-
 		var returned = require('./foo');
+		sut('./foo').return(fooFake);
+		var returnedSecond = require('./foo');
+
+
 		
 		test('it should execute returns real foo', function(){
 			assert.notEqual(fooFake,returned);
+    	});
+
+		test('it should execute returns fake foo second time', function(){
+			assert.equal(fooFake,returnedSecond);
     	});
 
 	})();

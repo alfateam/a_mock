@@ -64,6 +64,32 @@ var test = require('../../../test');
 	})();
 
 	(function() {		
+		console.log('expect return after clear');		
+		var sut = newSut(original);
+		sut.expect().return(foo);
+		sut.expect().return(foo);
+
+		var firstReturned = sut();
+		sut.clear();
+		var secondReturned = sut();
+		sut.expect().return(foo);
+		var thirdReturned = sut();
+
+		test('it should execute returns foo first time', function(){
+			assert.equal(foo,firstReturned);
+    	});
+
+		test('it should execute returns original second time', function(){
+			assert.equal(originalReturnValue,secondReturned);
+    	});
+
+		test('it should execute returns foo third time', function(){
+			assert.equal(foo,thirdReturned);
+    	});
+
+	})();
+
+	(function() {		
 		console.log('expect return foo then baz');		
 		var sut = newSut(original);
 		sut.expect().return(foo);
