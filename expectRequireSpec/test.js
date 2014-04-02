@@ -40,3 +40,21 @@ var bazFake = {};
 	})();
 
 })();
+
+(function(){
+	console.log('expectRequire clear');
+	
+	(function() {		
+		console.log('require');
+		sut('./foo').return(fooFake);
+		sut.clear();
+
+		var returned = require('./foo');
+		
+		test('it should execute returns real foo', function(){
+			assert.notEqual(fooFake,returned);
+    	});
+
+	})();
+
+})();

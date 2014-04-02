@@ -5,6 +5,7 @@ var expectRequire = require('../partialMock/simple/expectRequire');
 
 var newMockMock = newMock();
 var expectRequireMock = newMock();
+expectRequireMock.clear = {};
 
 expectRequire('./mock').return(newMockMock);
 expectRequire('./expectRequire').return(expectRequireMock);
@@ -21,8 +22,8 @@ expectRequire('./expectRequire').return(expectRequireMock);
 	expectRequireMock.expect(moduleName).return(expectation);
 	expectation.return = returnMock;
 	returnMock.expect(mock).whenCalled(onReturnMock).return(null);
-
-	var returned = require('../requireMock')(moduleName);
+	var sut = require('../requireMock');
+	var returned = sut(moduleName);
 
 	function onReturnMock() {
 		didExpectRequireReturnMock = true;
@@ -35,5 +36,10 @@ expectRequire('./expectRequire').return(expectRequireMock);
 	test('it should expectRequire to return mock',function(){
 		assert.ok(didExpectRequireReturnMock);
 	});
+
+	test('clear should point at expectRequire.clear',function(){
+		assert.equal(sut.clear, expectRequireMock.clear);
+	});
+
 
 })();
