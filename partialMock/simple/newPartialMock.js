@@ -112,7 +112,7 @@ function create(originalFunc) {
 		return mockArray[length-1];
 	}
 
-	mock.clear = function() {
+	mock.reset = function() {
 		mockArray = [];
 	};
 

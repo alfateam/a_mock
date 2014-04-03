@@ -64,13 +64,13 @@ var test = require('../../../test');
 	})();
 
 	(function() {		
-		console.log('expect return after clear');		
+		console.log('expect return after reset');		
 		var sut = newSut(original);
 		sut.expect().return(foo);
 		sut.expect().return(foo);
 
 		var firstReturned = sut();
-		sut.clear();
+		sut.reset();
 		var secondReturned = sut();
 		sut.expect().return(foo);
 		var thirdReturned = sut();

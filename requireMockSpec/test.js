@@ -37,8 +37,8 @@ expectRequire('./expectRequire').return(expectRequireMock);
 		assert.ok(didExpectRequireReturnMock);
 	});
 
-	test('clear should point at expectRequire.clear',function(){
-		assert.equal(sut.clear, expectRequireMock.clear);
+	test('reset should point at expectRequire.reset',function(){
+		assert.equal(sut.reset, expectRequireMock.reset);
 	});
 
 

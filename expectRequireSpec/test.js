@@ -42,12 +42,12 @@ var bazFake = {};
 })();
 
 (function(){
-	console.log('expectRequire clear');
+	console.log('expectRequire reset');
 	
 	(function() {		
 		console.log('require');
 		sut('./foo').return(fooFake);
-		sut.clear();
+		sut.reset();
 		var returned = require('./foo');
 		sut('./foo').return(fooFake);
 		var returnedSecond = require('./foo');

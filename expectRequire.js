@@ -15,7 +15,7 @@ if(!mod._requireMock) {
 	}
 
 }
-expect.clear = mod._requireMock.clear;
+expect.reset = mod._requireMock.reset;
 
 
 module.exports = expect;

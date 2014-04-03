@@ -7,7 +7,7 @@ function create(moduleName) {
 	return mock;
 }
 
-create.clear = expectRequire.clear;
+create.reset = expectRequire.reset;
 
 module.exports  = create;
 
