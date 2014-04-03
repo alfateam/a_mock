@@ -1,14 +1,13 @@
-function _new(originalFallback) {
-	var newFallbackWrapper = require('./newFallbackWrapper');
-	var and = require('../newMutableAnd')();
-	var mockContext = {};	
-	mockContext.execute = newFallbackWrapper(originalFallback);
-	mockContext.originalFallback = originalFallback;
-	mockContext.lastExecute = mockContext.execute;
-	mockContext.compositeAreCorrectArguments = and;
-	mockContext.expectCount = 0;
+var newObject = require('../newObject')
+var reset = require('./mockContext/reset');
 
-	return mockContext;
+function _new(originalFallback) {
+	var c = newObject();
+	c = reset(c,originalFallback);
+	c.reset = function() {
+		return reset(c, originalFallback);
+	};
+	return c;	
 }
 
 module.exports = _new;

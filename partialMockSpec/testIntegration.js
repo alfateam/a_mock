@@ -76,6 +76,21 @@ function fallback(arg,arg2)
 		assert.equal(returned2,fallbackValue);
 	});
 
+	test('it should return correct after expect, reset, expect',function() {
+		var arg = 'a';
+		var expected = {};
+		var sut = newSut(fallback);
+		sut.expect(arg).return(expected);
+		sut.reset();
+		var returned = sut(arg);
+		sut.expect(arg).return(expected);
+		var returned2 = sut(arg);
+		var returned3 = sut(arg);
+		assert.equal(returned,fallbackValue);
+		assert.equal(returned2,expected);
+		assert.equal(returned3,fallbackValue);
+	});
+
 	test('it should throw for correct arg',function() {
 		var arg = 'a';
 		var error = {};

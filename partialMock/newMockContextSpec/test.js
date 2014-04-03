@@ -3,39 +3,34 @@ var test = require('../../test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
-var newFallbackWrapper = newRequireMock('./newFallbackWrapper');
-var newMutableAnd = newRequireMock('../newMutableAnd');
+var newObject = newRequireMock('../newObject');
+var reset = newRequireMock('./mockContext/reset');
 
 var newSut = require('../newMockContext');
 
 (function() {
 	console.log('newMockContext');
 	var originalFallback = {};
-	var fallbackWrapper = {};
-	var passedContext;
-	var mutableAnd = {};
-	newFallbackWrapper.expect(originalFallback).return(fallbackWrapper);
-	newMutableAnd.expect().return(mutableAnd);
-	
+	var didReset;
+	var object = {};
+	var context = {};
+	var resetResult = {};
+
+	newObject.expect().return(object);
+	reset.expect(object).expect(originalFallback).return(context);
 	var sut = newSut(originalFallback);
 
-	test('it should set execute to fallbackWrapper',function() {
-		assert.equal(sut.execute,fallbackWrapper);
+
+	test('it should return context',function() {
+		assert.equal(sut, context);
 	});
 
-	test('it should set originalFallback',function() {
-		assert.equal(sut.originalFallback,originalFallback);
-	});
+	console.log('reset');
+	reset.expect(context).expect(originalFallback).return(resetResult);
+	returned = sut.reset();
 
-	test('it should set compositeAreCorrectArguments',function() {
-		assert.equal(sut.compositeAreCorrectArguments,mutableAnd);
+	test('forwards to reset',function() {
+		assert.equal(returned, resetResult);
 	});
-
-	test('it should set lastExecute',function() {
-		assert.equal(sut.lastExecute,fallbackWrapper);
-	});
-
-	test('it should set expectCount to zero',function() {
-		assert.equal(sut.expectCount,0);
-	});
+	
 })();

@@ -26,6 +26,7 @@ function fallback() {}
 
 		function stubMockContext() {
 			mockContext = {};
+			mockContext.reset = {};
 			newMockContext.expect(fallback).return(mockContext);
 		}
 
@@ -35,7 +36,11 @@ function fallback() {}
 
 	
 	test('should set ignore as alias for expectAnything', function() {
-		assert.equal(c.sut.ignore,c.sut.expectAnything);
+		assert.equal(sut.ignore, sut.expectAnything);
+	});	
+
+	test('reset points at mockContext.reset', function() {
+		assert.equal(sut.reset, mockContext.reset);
 	});	
 
 	(function() {		

@@ -34,7 +34,8 @@ function create(originalFunc) {
 		return expectAnything.apply(null,args);
 	};
 
-	mock.ignore = expectAnything;
+	mock.ignore = mock.expectAnything;
+	mock.reset = mockContext.reset;
 
 	mock.verify = function() {		
 		negotiateEnd();
