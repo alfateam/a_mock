@@ -8,6 +8,9 @@
   "repository" : {
          "type" : "git",
          "url"  : "git@github.com:alfateam/a_mock.git"
-      }
+      },
+    "dependencies": {  
+    "promise" : "5.0.0"
+  },
  
 }
