@@ -2,6 +2,6 @@ module.exports = {
 	mock: require('./mock'),
 	expectRequire: require('./expectRequire'),
 	requireMock: require('./requireMock'),
-	then: require('./newThen');
+	then: require('./newThen')
 };
 
