@@ -1,16 +1,15 @@
 {
   "name": "a_mock",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "index.js",
   "title": "a_mock",
   "description": "Sub package of a. Mocking framework",
   "keywords": ["mock","mocking","partial mock","strict mock","tdd","stub","stubbing","mock require","verify"],
-  "repository" : {
-         "type" : "git",
-         "url"  : "git@github.com:alfateam/a_mock.git"
-      },
-    "dependencies": {  
+  "dependencies": {  
     "promise" : "5.0.0"
   },
- 
+  "repository" : {
+    "type" : "git",
+    "url"  : "git@github.com:alfateam/a_mock.git"
+  }  
 }
