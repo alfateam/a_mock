@@ -1,24 +1,27 @@
-var newPromise = require('./promise');
-var newResolver = require('./promise/newResolver');
+var newPromise = require('deferred');
 
 function newThen() {
-	var resolver = newResolver();
-	var _promise = newPromise(resolver);
+	var def = newPromise();
 
 	function promise(success, error) {
-		if (success !== null)			
-			return resolver.resolve(success);
-		if (error !== null)
-			return resolver.reject(error);
-		return resolver.resolve();
+		if (arguments.length == 0)
+			return def.resolve();
+		if (success !== null )			
+			return def.resolve(success);
+		return def.reject(error);
 	}
 
-	promise.then = function() {
-		return _promise.then.apply(_promise,arguments);
+	promise.then = function(success,error) {
+		return def.promise.apply(def,arguments);
 	};
 
-	promise.resolve = resolver.resolve;
-	promise.reject = resolver.reject;
+	promise.resolve = function() {
+		return def.resolve.apply(def,arguments);
+	};
+
+	promise.reject = function() {
+		return def.reject.apply(def,arguments);
+	};
 
 	return promise;
 
