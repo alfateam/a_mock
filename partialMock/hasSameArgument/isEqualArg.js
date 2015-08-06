@@ -1,5 +1,5 @@
-var Buffer = require('buffer').Buffer;
-var util = require('util');
+var Buffer = require('../../buffer').Buffer;
+var util = require('../../util');
 
 function isEqualArg(x, y) {
     if (isValueType(x) || isValueType(y))

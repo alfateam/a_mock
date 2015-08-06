@@ -1,6 +1,6 @@
 {
   "name": "a_mock",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "main": "index.js",
   "title": "a_mock",
   "description": "Sub package of a. Mocking framework",
