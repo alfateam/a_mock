@@ -115,11 +115,13 @@ function fallback(arg,arg2)
 		var expected = {};
 		var sut = newSut();
 		sut.expect().throw(error);
+		console.log('hei');
 		sut.expect().return(expected);
 		try	{		
 			sut();
 		}
 		catch (e) {
+			console.log(e.stack);
 			thrown = e;
 		}
 
@@ -231,7 +233,7 @@ function fallback(arg,arg2)
 		assert.ok(sut.verify());
 	});
 
-	test('it should return expected for arg, anything, ignore',function() {
+	test('it should return expected for arg, anything',function() {
 		var arg = 'a';
 		var arg2 = 'b';
 		var arg3;
@@ -239,7 +241,7 @@ function fallback(arg,arg2)
 		var sut = newSut(fallback);
 
 
-		sut.expect(arg).expectAnything().ignore().return(expected);
+		sut.expect(arg).expectAnything().return(expected);
 		var returned = sut(arg,arg2,arg3);		
 		var returned2 = sut(arg,arg2,arg3);
 

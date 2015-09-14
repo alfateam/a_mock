@@ -4,7 +4,7 @@ function _return(returnValue,index,mockContext) {
 	var oneTime = 1;
 
 	mockContext.numberOfArgs = undefined;
-	var hasNoMoreArguments = newHasNoMoreArguments(index);	
+	var hasNoMoreArguments = newHasNoMoreArguments(index, mockContext);	
 	var hasCorrectArgs = mockContext.compositeAreCorrectArguments.add(hasNoMoreArguments);	
 	setExecute(returnValue,hasCorrectArgs,mockContext,oneTime);	
 	var c = {};

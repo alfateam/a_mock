@@ -26,7 +26,7 @@ var sut = require('../expectEmpty');
 	stubCompositeAreCorrectArguments();
 
 	function stubHasNoMoreArguments() {
-		newHasNoMoreArguments.expect(index).return(hasCorrectArgument);		
+		newHasNoMoreArguments.expect(index).expect(mockContext).return(hasCorrectArgument);		
 	}
 
 	function stubWhenCalledEmitter() {

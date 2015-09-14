@@ -5,6 +5,7 @@ var newRequireMock = require('../simple/newRequireMock');
 
 var expect  = newRequireMock('./expect');
 var expectAnything = newRequireMock('./expectAnything');
+var ignore = newRequireMock('./ignore');
 var expectArray = newRequireMock('./expectArray');
 var _return = newRequireMock('./return');
 var newWhenCalledEmitter = newRequireMock('../eventEmitter');
@@ -57,10 +58,6 @@ var sut = require('../expectCore');
 		assert.equal(mockContext.whenCalledEmitter,whenCalledEmitter);
 	});
 
-	test('should set ignore as alias for expectAnything', function() {
-		assert.equal(sut2.ignore,sut2.expectAnything);
-	});	
-
 	(function() {
 		console.log('expect');
 		var expected = {};
@@ -80,6 +77,18 @@ var sut = require('../expectCore');
 		var arg = {};
 		expectAnything.expect(index+1).expect(mockContext).return(expected);
 		var returned = sut2.expectAnything(); 
+
+		test('should return expected',function() {
+			assert.equal(returned,expected)
+		});
+	})();
+
+	(function() {
+		console.log('ignore');
+		var expected = {};
+		var arg = {};
+		ignore.expect(index+1).expect(mockContext).return(expected);
+		var returned = sut2.ignore(); 
 
 		test('should return expected',function() {
 			assert.equal(returned,expected)
