@@ -59,6 +59,12 @@ var sut = require('../expectAnything');
 		assert.equal(mockContext.whenCalledEmitter,whenCalledEmitter);
 	});
 
+	test('expectAnything should return self',function() {
+		assert.equal(sut2, sut2.expectAnything());
+	});
+
+
+
 	(function() {
 		console.log('return');
 		var expected = {};

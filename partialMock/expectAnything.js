@@ -20,6 +20,10 @@ function expectAnything(index,mockContext) {
 		return expect.apply(null,args);
 	};
 
+	c.expectAnything = function() {
+		return c;
+	}
+
 	c.return = function(arg) {
 		return _return(arg,index+1,mockContext);
 	};
