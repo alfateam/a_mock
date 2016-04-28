@@ -5,7 +5,7 @@ var mock = require('../partialMock/simple/newMock');
 
 (function(){
 	console.log('then');
-	
+
 	var newResolver = requireMock('deferred');
 	var resolve = mock();
 	var reject = mock();
@@ -20,8 +20,8 @@ var mock = require('../partialMock/simple/newMock');
 	promise.then = mock();
 
 	var arg = {};
-	
-	var sut = require('../newThen')();		
+
+	var sut = require('../index').then();		
 
 	test('then should return promiseResult',function() {
 		var expected = {};
@@ -33,7 +33,7 @@ var mock = require('../partialMock/simple/newMock');
 		var expected = {};
 		resolver.resolve.expect(arg).return(expected);
 		assert.equal(sut.resolve(arg),expected);
-	});	
+	});
 
 	test('then reject should invoke resolver.reject',function() {
 		var expected = {};
@@ -45,7 +45,7 @@ var mock = require('../partialMock/simple/newMock');
 		var expected = {};
 		resolver.resolve.expect(arg).return(expected);
 		assert.equal(sut(arg),expected);
-	});	
+	});
 
 	test('then implicit reject should invoke resolver.reject',function() {
 		var expected = {};
