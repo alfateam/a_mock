@@ -40,7 +40,7 @@ function getRequiringModulePath() {
     var path;
     var mod = module;
     //3 levels up: this file -> a_mock/index -> a/index -> requiring module
-    for(var i = 0; i < 4; i++) {
+    for(var i = 0; i < 3; i++) {
         if(!mod.parent) return path;
         mod = mod.parent;
         path = mod.filename;
