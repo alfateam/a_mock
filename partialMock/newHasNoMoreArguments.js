@@ -1,6 +1,12 @@
-function _new(maxLength) {
-	
-	function hasNoMoreArguments(){
+var empty = require('../and');
+
+function _new(maxLength, context) {
+	if (context.expectAnything) {
+		context.expectAnything = false;
+		return empty;	
+	}
+
+	function hasNoMoreArguments(){		
 		return (arguments.length == maxLength);
 	}
 

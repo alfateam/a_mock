@@ -24,7 +24,7 @@ var sut = require('../return');
 	stubSetExecute();
 
 	function stubHasNoMoreArguments() {
-		newHasNoMoreArguments.expect(index).return(hasNoMoreArguments);
+		newHasNoMoreArguments.expect(index).expect(mockContext).return(hasNoMoreArguments);
 	}
 
 	function stubMockContext() {

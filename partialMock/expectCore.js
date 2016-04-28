@@ -1,6 +1,7 @@
 function expect(hasCorrectArgument,index,mockContext) {
 	var expect = require('./expect');
 	var expectAnything = require('./expectAnything');
+	var ignore = require('./ignore');
 	var expectArray = require('./expectArray');
 	var _return = require('./return');
 	var newThrow = require('./newThrow');
@@ -23,7 +24,9 @@ function expect(hasCorrectArgument,index,mockContext) {
 		return expectAnything(index+1,mockContext);
 	};
 
-	c.ignore = c.expectAnything;
+	c.ignore = function() {
+		return ignore(index+1,mockContext);
+	}
 
 	c.expectArray = function(array) {
 		return expectArray(index+1,mockContext,array);

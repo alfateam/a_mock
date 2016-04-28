@@ -231,7 +231,7 @@ function fallback(arg,arg2)
 		assert.ok(sut.verify());
 	});
 
-	test('it should return expected for arg, anything, ignore',function() {
+	test('it should return expected for arg, anything twice',function() {
 		var arg = 'a';
 		var arg2 = 'b';
 		var arg3;
@@ -239,12 +239,31 @@ function fallback(arg,arg2)
 		var sut = newSut(fallback);
 
 
-		sut.expect(arg).expectAnything().ignore().return(expected);
+		sut.expect(arg).expectAnything().return(expected).repeat(2);
 		var returned = sut(arg,arg2,arg3);		
-		var returned2 = sut(arg,arg2,arg3);
+		var returned2 = sut(arg,arg2);
+		var returned3 = sut('foo',arg2);
+
+		assert.equal(returned,expected);
+		assert.equal(returned2,expected);
+		assert.equal(returned3,fallbackValue);
+		assert.ok(sut.verify());
+	});
+
+	test('it should return expected for arg, ignore twice',function() {
+		var arg = 'a';
+		var arg2 = 'b';
+		var expected = {};
+		var sut = newSut(fallback);
+
+		sut.expect(arg).ignore().expect(arg2).return(expected).repeat(2);
+		var returned = sut(arg,'foo',arg2);		
+		var returned2 = sut(arg,'bar',arg2, 'a');
+		var returned3 = sut(arg,{},arg2);
 
 		assert.equal(returned,expected);
 		assert.equal(returned2,fallbackValue);
+		assert.equal(returned3,expected);
 		assert.ok(sut.verify());
 	});
 

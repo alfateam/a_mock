@@ -3,7 +3,7 @@ var newThrow = require('./newThrow');
 function expectEmpty(mockContext) {
 	var _return = require('./return');
 	mockContext.whenCalledEmitter = require('../eventEmitter')();
-	var hasCorrectArgument = require('./newHasNoMoreArguments')(0);
+	var hasCorrectArgument = require('./newHasNoMoreArguments')(0, mockContext);
 	
 	var c = {};
 	mockContext.compositeAreCorrectArguments.add(hasCorrectArgument);
