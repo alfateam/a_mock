@@ -7,7 +7,7 @@ var _return = newRequireMock('./return');
 var newWhenCalledEmitter = newRequireMock('../eventEmitter');
 var newHasNoMoreArguments = newRequireMock('./newHasNoMoreArguments');
 var newThrow = newRequireMock('./newThrow');
-
+var newThen = newRequireMock('../newThen');
 var sut = require('../expectEmpty');
 
 
@@ -161,5 +161,34 @@ var sut = require('../expectEmpty');
 		});
 	})();
 
+	(function() {
+		console.log('resolve');
+		var expected = {};
+		var arg = {};
+		newThen.resolve = newMock();
+		var promise = {};
+		newThen.resolve.expect(arg).return(promise);		
+		_return.expect(promise).expect(index).expect(mockContext).return(expected);
+		var returned = sut2.resolve(arg); 
+
+		test('it should return expected as promise',function() {
+			assert.equal(expected,returned)
+		});
+	})();
+
+	(function() {
+		console.log('reject');
+		var expected = {};
+		var arg = {};
+		newThen.reject = newMock();
+		var promise = {};
+		newThen.reject.expect(arg).return(promise);		
+		_return.expect(promise).expect(index).expect(mockContext).return(expected);
+		var returned = sut2.reject(arg); 
+
+		test('it should return expected as promise',function() {
+			assert.equal(expected,returned)
+		});
+	})();
 
 })();

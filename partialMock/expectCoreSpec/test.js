@@ -10,6 +10,7 @@ var expectArray = newRequireMock('./expectArray');
 var _return = newRequireMock('./return');
 var newWhenCalledEmitter = newRequireMock('../eventEmitter');
 var newThrow = newRequireMock('./newThrow');
+var newThen = newRequireMock('../newThen');
 var sut = require('../expectCore');
 
 
@@ -205,5 +206,36 @@ var sut = require('../expectCore');
 			assert.equal(returned,expected)
 		});
 	})();
+
+	(function() {
+		console.log('resolve');
+		var expected = {};
+		var arg = {};
+		promise = {};
+		newThen.resolve = newMock();		
+		newThen.resolve.expect(arg).return(promise);
+		_return.expect(promise).expect(index+1).expect(mockContext).return(expected);
+		var returned = sut2.resolve(arg); 
+
+		test('should return expected as promise',function() {
+			assert.equal(returned,expected)
+		});
+	})();
+
+	(function() {
+		console.log('reject');
+		var expected = {};
+		var arg = {};
+		promise = {};
+		newThen.reject = newMock();		
+		newThen.reject.expect(arg).return(promise);
+		_return.expect(promise).expect(index+1).expect(mockContext).return(expected);
+		var returned = sut2.reject(arg); 
+
+		test('should return expected as promise',function() {
+			assert.equal(returned,expected)
+		});
+	})();
+
 
 })();

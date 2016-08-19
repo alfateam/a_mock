@@ -5,6 +5,7 @@ function expect(hasCorrectArgument,index,mockContext) {
 	var expectArray = require('./expectArray');
 	var _return = require('./return');
 	var newThrow = require('./newThrow');
+	var newThen = require('../newThen');
 	mockContext.whenCalledEmitter = require('../eventEmitter')();
 
 
@@ -52,6 +53,16 @@ function expect(hasCorrectArgument,index,mockContext) {
 
 	c.repeatAny = function() {
 		return _return(undefined,index+1,mockContext).repeatAny();
+	};
+
+	c.resolve = function(value) {
+		var promise = newThen.resolve(value);
+		return c.return(promise);
+	};
+
+	c.reject = function(value) {
+		var promise = newThen.reject(value);
+		return c.return(promise);
 	};
 
 	return c;
