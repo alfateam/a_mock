@@ -1,5 +1,14 @@
 type AnyFunction = (...args: any[]) => any;
 type Tail<T extends any[]> = T extends [any, ...infer R] ? R : [];
+type FunctionProps<T> = T extends (...args: any[]) => any
+  ? { [K in Exclude<keyof T, keyof Function>]: Mocked<T[K]> }
+  : {};
+type MockedFunction<T extends AnyFunction> = MockFunction<
+  Parameters<T>,
+  ReturnType<T>
+> &
+  T &
+  FunctionProps<T>;
 
 interface RepeatControl {
   repeat(times: number): RepeatControl;
@@ -28,6 +37,8 @@ interface ExpectationChain<TArgs extends any[], R>
 
 interface MockFunction<TArgs extends any[], R> {
   (...args: TArgs): R;
+  // Allow any-args calls in addition to the original signature.
+  (...args: any[]): any;
   expect(): ExpectationTerminal<R, TArgs>;
   expect(...args: TArgs): ExpectationTerminal<R, TArgs>;
   expect(arg: TArgs[0]): ExpectationChain<Tail<TArgs>, R>;
@@ -36,12 +47,14 @@ interface MockFunction<TArgs extends any[], R> {
   expectArray(
     value: TArgs[0] extends any[] ? TArgs[0] : any[]
   ): ExpectationChain<Tail<TArgs>, R>;
+  // Allow any-args expectations in addition to typed expectations.
+  expect(...args: any[]): ExpectationTerminal<any, any[]>;
   verify(): true;
   reset(): void;
 }
 
-type Mocked<T> = T extends (...args: infer A) => infer R
-  ? MockFunction<A, R>
+type Mocked<T> = T extends AnyFunction
+  ? MockedFunction<T>
   : T extends object
   ? { [K in keyof T]: Mocked<T[K]> } & { verify: () => true }
   : T;
@@ -69,7 +82,7 @@ declare function mock<TArgs extends any[] = any[], R = any>(): MockFunction<
 >;
 declare function mock<T extends AnyFunction>(
   original: T
-): MockFunction<Parameters<T>, ReturnType<T>>;
+): MockedFunction<T>;
 declare function mock<T extends object>(subject: T): Mocked<T>;
 
 declare function expectRequire(moduleName: string): RequireExpectation;

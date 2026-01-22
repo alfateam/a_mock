@@ -1,4 +1,4 @@
-function create(originalFunc) {
+function create(originalFunc, thisArg) {
 	var newMockContext = require('./partialMock/newMockContext');
 	var expect = require('./partialMock/expect');
 	var expectAnything = require('./partialMock/expectAnything');
@@ -7,13 +7,13 @@ function create(originalFunc) {
 	var verify = require('./partialMock/verify');
 	var expectEmpty = require('./partialMock/expectEmpty');
 	var newEmptyAnd = require('./newMutableAnd');		
-	var mockContext = newMockContext(originalFunc);
+	var mockContext = newMockContext(originalFunc, thisArg);
 	var _negotiateEnd = require('./partialMock/negotiateEnd');	
 
 	function mock() {		
 		negotiateEnd();
 		mockContext.arguments = arguments;		
-		return mockContext.execute.apply(null,arguments);
+		return mockContext.execute.apply(this,arguments);
 	}
 
 	mock.expect = function() {				

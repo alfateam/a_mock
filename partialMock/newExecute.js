@@ -8,7 +8,7 @@ function newExecute(returnValue,hasCorrectArguments,mockContext,shouldDecrementE
 		for(var index = 0; index < arguments.length; index++) {
 			args.push(arguments[index]);
 		}
-		return _execute.apply(null,args);
+		return _execute.apply(this,args);
 		returnValue,fallback,hasCorrectArguments
 	}
 

@@ -13,7 +13,8 @@ function execute(returnValue,fallback,hasCorrectArguments,mockContext,shouldDecr
 		return returnValue;
 	}
 		
-	return fallback.apply(null,args);
+	var receiver = mockContext && mockContext.thisArg != null ? mockContext.thisArg : this;
+	return fallback.apply(receiver,args);
 }
 
 module.exports = execute;
