@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../test');
+var test = require('node:test');
 var newMock = require('../partialMock/simple/newMock');
 var newSut = require('../partialMock');
 
@@ -11,7 +11,6 @@ function fallback(arg, arg2) {
 }
 
 (function() {
-    console.log('partialMock');
 
     test('it should return expected given stubbed twice with repeat', function() {
         var arg = 'a';

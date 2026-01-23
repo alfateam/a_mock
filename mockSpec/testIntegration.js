@@ -1,15 +1,13 @@
 var assert = require('assert');
-var test = require('../test');
+var test = require('node:test');
 var mock = require('../mock');
 
 (function clearCache() {
 	Object.keys(require.cache).forEach(function(key) { delete require.cache[key]; });
 })();
 
-console.log('mock');
 
 (function(){
-	console.log('an object');
 	var realName = 'Alfonzo';
 	function newCustomer() {
 
@@ -50,7 +48,6 @@ console.log('mock');
 
 
 (function foo(){
-	console.log('violating function throws with minium stack trace');
 
 	var sut = mock();
 	var lines;
@@ -75,7 +72,6 @@ console.log('mock');
 })();
 
 (function bar(){
-	console.log('violating function throws with minium stack trace given two expectations');
 
 	var sut = mock();
 	var lines;

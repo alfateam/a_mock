@@ -1,4 +1,4 @@
-var test = require('../../test');
+var test = require('node:test');
 var assert = require('assert');
 var requireMock = require('../simple/newRequireMock');
 var expectRequire = require('../simple/expectRequire');
@@ -7,10 +7,8 @@ var _return = requireMock('./return');
 var mockContext = {};
 var sut = require('../negotiateEnd');
 
-console.log('negotiateEnd');
 
 	(function() {
-		console.log('2 args pending.when execute');
 		var numberOfArgs = 2;
 		var didCallReturn;
 		mockContext.numberOfArgs = numberOfArgs;
@@ -31,7 +29,6 @@ console.log('negotiateEnd');
 
 
 (function() {
-		console.log('0 args pending.when execute');
 		var numberOfArgs = 0;
 		var didCallReturn;
 		mockContext.numberOfArgs = numberOfArgs;
@@ -53,7 +50,6 @@ console.log('negotiateEnd');
 
 
 	(function() {
-		console.log('not pending.when execute');		
 		mockContext.numberOfArgs = undefined;
 		sut(mockContext);
 
@@ -61,4 +57,3 @@ console.log('negotiateEnd');
 			assert.ok(1);
 		});
 	})();
-

@@ -1,15 +1,13 @@
 var assert = require('assert');
-var test = require('../test');
+var test = require('node:test');
 var newRequireMock = require('../partialMock/simple/newRequireMock');
 var newMock = require('../partialMock/simple/newMock');
 
 
 (function(){
-	console.log('and');
 	var sut = require('../and');
 
 	(function() {
-		console.log('execute');
 		var returned = sut();
 
 		test('it returns true',function() {
@@ -18,7 +16,6 @@ var newMock = require('../partialMock/simple/newMock');
 	})();
 
 	(function() {
-		console.log('add');
 		var newMonadicAnd = newRequireMock('./and/newMonadicAnd');
 		var monadicAnd = {};
 		var predicate = {};

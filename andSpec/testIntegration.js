@@ -1,12 +1,11 @@
 var assert = require('assert');
-var test = require('../test');
+var test = require('node:test');
 var newRequireMock = require('../partialMock/simple/newRequireMock');
 var newMock = require('../partialMock/simple/newMock');
 
 var and = require('../and');
 
 (function(){
-	console.log('and');
 	var arg = {};
 	var arg2 = {};
 	var predicate1 = newMock();

@@ -1,4 +1,4 @@
-var test = require('../test');
+var test = require('node:test');
 var assert = require('assert');
 var newMock = require('../partialMock/simple/newMock');
 var newRequireMock = require('../partialMock/simple/newRequireMock');
@@ -18,7 +18,6 @@ var mutableAnd = {};
 function fallback() {}
 
 (function () {
-	console.log('partialMock');	
 	var sut;
 	var fallbackMock;
 	var mockContext;
@@ -42,7 +41,6 @@ function fallback() {}
 	});	
 
 	(function() {		
-		console.log('when execute ');		
 		var arg = {};
 		var expected = {};		
 		var execute = newMock();
@@ -68,7 +66,6 @@ function fallback() {}
 	
 
 	(function() {
-		console.log('when execute');
 		var expected = {};
 		mockContext.compositeAreCorrectArguments = null;
 		var arg = 'arg';
@@ -99,7 +96,6 @@ function fallback() {}
 	})();
 
 	(function() {
-		console.log('when expect empty');
 		var expected = {};
 		var didNegotiateEnd;
 		mockContext.compositeAreCorrectArguments = null;
@@ -129,7 +125,6 @@ function fallback() {}
 
 
 	(function() {
-		console.log('when expectAnything');
 		var expected = {};
 		var didNegotiateEnd;
 		mockContext.compositeAreCorrectArguments = null;
@@ -156,7 +151,6 @@ function fallback() {}
 	})();
 
 	(function() {
-		console.log('when ignore');
 		var expected = {};
 		var didNegotiateEnd;
 		mockContext.compositeAreCorrectArguments = null;
@@ -183,7 +177,6 @@ function fallback() {}
 	})();
 
 	(function() {
-		console.log('when verify');
 		var expected = {};
 		var didNegotiateEnd;
 		verify.expect(mockContext).return(expected);
@@ -204,7 +197,6 @@ function fallback() {}
 	})();
 
 	(function() {
-		console.log('when expectArray');
 		var expected = {};		
 		var didNegotiateEnd;
 		mockContext.compositeAreCorrectArguments = null;

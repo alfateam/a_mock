@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -11,7 +11,6 @@ var negotiateIncrementExpectCount = newRequireMock('./negotiateIncrementExpectCo
 var sut = require('../setExecute');
 
 (function(){
-	console.log('setExecute');
 	var mockContext = {};
 	var returnValue = {};
 	var hasCorrectArguments = {};

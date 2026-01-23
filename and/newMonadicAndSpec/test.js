@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newRequireMock = require('../../partialMock/simple/newRequireMock');
 var newMock = require('../../partialMock/simple/newMock');
 
@@ -8,12 +8,10 @@ var newSut = require('../newMonadicAnd');
 
 
 (function(){
-	console.log('newMonadicAnd');
 	var predicate = newMock();	
 	var sut = newSut(predicate);
 
 	(function() {
-		console.log('execute');
 		var arg = {};
 		var expected = {};
 		predicate.expect(arg).return(expected);
@@ -27,7 +25,6 @@ var newSut = require('../newMonadicAnd');
 
 
 	(function() {
-		console.log('add');
 		var binaryAnd = {};
 		var predicate = {};
 		var predicate2 = {};

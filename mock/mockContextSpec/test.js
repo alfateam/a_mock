@@ -1,14 +1,12 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newRequireMock = require('../../partialMock/simple/newRequireMock');
 
 (function(){
-	console.log('mockContext');
 	var newVerify = newRequireMock('../newMutableAnd');
 	var sut = require('../mockContext');
 
 	(function() {
-		console.log('empty input.new');
 		var verify = {};
 		newVerify.expect().return(verify);	
 		var returned = sut();
@@ -19,7 +17,6 @@ var newRequireMock = require('../../partialMock/simple/newRequireMock');
 	})();
 
 	(function() {		
-		console.log('nonEmpty input.new');
 		var input = {};		
 		var returned = sut(input);
 

@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -12,7 +12,6 @@ var sut = require('../expectEmpty');
 
 
 (function() {
-	console.log('expectEmpty');
 	var mockContext = {};
 	var compositeAreCorrectArguments = newMock();
 	var whenCalledEmitter = {}	;
@@ -63,7 +62,6 @@ var sut = require('../expectEmpty');
 	});
 
 	(function() {
-		console.log('return');
 		var expected = {};
 		var arg = {};
 		_return.expect(arg).expect(index).expect(mockContext).return(expected);
@@ -75,7 +73,6 @@ var sut = require('../expectEmpty');
 	})();
 
 	(function() {
-		console.log('whenCalled');
 		var callback = {};
 		var expected;
 		var add = newMock();
@@ -101,7 +98,6 @@ var sut = require('../expectEmpty');
 	})();
 
 	(function() {
-		console.log('throw');
 		var error = {};				
 		var _throw = {};
 		var expected = {};
@@ -117,7 +113,6 @@ var sut = require('../expectEmpty');
 	})();
 
 	(function() {
-		console.log('repeat');
 		var expected = {};
 		var times = 2;
 		var returnContext = {};
@@ -140,7 +135,6 @@ var sut = require('../expectEmpty');
 	})();
 
 	(function() {
-		console.log('repeatAny');
 		var expected = {};
 		var returnContext = {};
 		var repeatMock = newMock();
@@ -162,7 +156,6 @@ var sut = require('../expectEmpty');
 	})();
 
 	(function() {
-		console.log('resolve');
 		var expected = {};
 		var arg = {};
 		newThen.resolve = newMock();
@@ -177,7 +170,6 @@ var sut = require('../expectEmpty');
 	})();
 
 	(function() {
-		console.log('reject');
 		var expected = {};
 		var arg = {};
 		newThen.reject = newMock();

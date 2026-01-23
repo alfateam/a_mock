@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../../../test');
+var test = require('node:test');
 var newMock = require('../../simple/newMock');
 var newRequireMock = require('../../simple/newRequireMock');
 
@@ -9,7 +9,6 @@ var newMutableAnd = newRequireMock('../../newMutableAnd');
 var sut = require('../reset');
 
 (function() {
-	console.log('reset mock');
 	var context = {};
 	var originalFallback = {};
 	var fallbackWrapper = {};

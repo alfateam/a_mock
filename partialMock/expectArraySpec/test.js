@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -9,7 +9,6 @@ var newHasEqualArgumentArray = newRequireMock('./newHasEqualArgumentArray');
 var sut = require('../expectArray');
 
 (function() {
-	console.log('expect');
 	var mockContext = {};
 	var isCorrectArgument = newMock();	
 	var argArray = []; 

@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -15,7 +15,6 @@ var sut = require('../expectCore');
 
 
 (function(){
-	console.log('expectCore');
 	var mockContext = {};
 	var compositeAreCorrectArguments = newMock();
 	var whenCalledEmitter = {}	;
@@ -60,7 +59,6 @@ var sut = require('../expectCore');
 	});
 
 	(function() {
-		console.log('expect');
 		var expected = {};
 		var arg = {};
 		var arg2 = {};
@@ -73,7 +71,6 @@ var sut = require('../expectCore');
 	})();
 
 	(function() {
-		console.log('expectAnything');
 		var expected = {};
 		var arg = {};
 		expectAnything.expect(index+1).expect(mockContext).return(expected);
@@ -85,7 +82,6 @@ var sut = require('../expectCore');
 	})();
 
 	(function() {
-		console.log('ignore');
 		var expected = {};
 		var arg = {};
 		ignore.expect(index+1).expect(mockContext).return(expected);
@@ -97,7 +93,6 @@ var sut = require('../expectCore');
 	})();
 
 	(function() {
-		console.log('expectArray');
 		var expected = {};
 		var arg = {};		
 		expectArray.expect(index+1).expect(mockContext).expect(arg).return(expected);
@@ -109,7 +104,6 @@ var sut = require('../expectCore');
 	})();
 
 	(function() {
-		console.log('return');
 		var expected = {};
 		var arg = {};
 		_return.expect(arg).expect(index+1).expect(mockContext).return(expected);
@@ -121,7 +115,6 @@ var sut = require('../expectCore');
 	})();
 
 	(function() {
-		console.log('whenCalled');
 		var callback = {};
 		var expected;
 		var add = newMock();
@@ -147,7 +140,6 @@ var sut = require('../expectCore');
 	})();
 
 	(function() {
-		console.log('throw');
 		var error = {};
 		var _throw = {};
 		var expected = {};
@@ -163,7 +155,6 @@ var sut = require('../expectCore');
 
 
 	(function() {
-		console.log('repeat');
 		var expected = {};
 		var times = 2;
 		var returnContext = {};
@@ -186,7 +177,6 @@ var sut = require('../expectCore');
 	})();
 
 	(function() {
-		console.log('repeatAny');
 		var expected = {};
 		var returnContext = {};
 		var repeatMock = newMock();
@@ -208,7 +198,6 @@ var sut = require('../expectCore');
 	})();
 
 	(function() {
-		console.log('resolve');
 		var expected = {};
 		var arg = {};
 		promise = {};
@@ -223,7 +212,6 @@ var sut = require('../expectCore');
 	})();
 
 	(function() {
-		console.log('reject');
 		var expected = {};
 		var arg = {};
 		promise = {};

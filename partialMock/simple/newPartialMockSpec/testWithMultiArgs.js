@@ -1,6 +1,6 @@
 var newSut = require('../newPartialMock');
 var assert = require('assert');
-var test = require('../../../test');
+var test = require('node:test');
 
 		var originalReturnValue = {};
 		var originalReturnValue2 = {};
@@ -18,10 +18,8 @@ var test = require('../../../test');
 
 
 (function(){
-	console.log('partialMockSpec multiple args.2');
 
 	(function() {		
-		console.log('expect arg1,arg2 return foo once.');	
 		var sut = newSut(original);
 		var callBackCount = 0;
 		function onCalled(actualArg1,actualArg2) {

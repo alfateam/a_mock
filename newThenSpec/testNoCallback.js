@@ -1,9 +1,8 @@
 var assert = require('assert');
-var test = require('../test');
+var test = require('node:test');
 var mock = require('../partialMock/simple/newMock');
 
 (function() {
-	console.log('resove value can be carried through a long chain');
 
 	var expected = {};
 	var actual;
@@ -27,7 +26,6 @@ var mock = require('../partialMock/simple/newMock');
 
 
 (function() {
-	console.log('reject value can be carried through a long chain');
 
 	var expected = {};
 	var actual;

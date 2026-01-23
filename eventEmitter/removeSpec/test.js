@@ -1,12 +1,10 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var sut = require('../remove');
 
 (function(){
-	console.log('removeSpec');
 
 	(function() {
-		console.log('execute');
 		var context = {};
 		var callback = {};
 		var callback0 = {};

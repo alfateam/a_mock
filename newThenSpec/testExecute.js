@@ -1,9 +1,8 @@
 var assert = require('assert');
-var test = require('../test');
+var test = require('node:test');
 var mock = require('../partialMock/simple/newMock');
 
 (function() {
-	console.log('execute with no args');
 
     var isResolved;
 
@@ -22,7 +21,6 @@ var mock = require('../partialMock/simple/newMock');
 
 
 (function() {
-	console.log('execute with 1 arg');
 
     var returned;
     var valueToResolveWith = {};
@@ -41,7 +39,6 @@ var mock = require('../partialMock/simple/newMock');
 })();
 
 (function() {
-	console.log('execute with 2 args');
 
     var returned;
     var valueToResolveWith = {};
@@ -61,7 +58,6 @@ var mock = require('../partialMock/simple/newMock');
 })();
 
 (function() {
-	console.log('execute with 2 args given first one is falsy');
 
     var returned;
     var errorToRejectWith = {};

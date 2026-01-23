@@ -1,13 +1,11 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 
 var sut = require('../verify');
 
 (function() {
-	console.log('verifySpec');
 
 	(function(){
-		console.log('expectCount is zero.execute');
 		var mockContext = {};
 		mockContext.expectCount = 0;
 		var returned = sut(mockContext);
@@ -18,7 +16,6 @@ var sut = require('../verify');
 	})();
 	
 	(function(){
-		console.log('expectCount is above zero.execute');
 		var mockContext = {};
 		mockContext.expectCount = 2;
 		var msg;

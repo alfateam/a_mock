@@ -1,6 +1,6 @@
 var newSut = require('../newPartialMock');
 var assert = require('assert');
-var test = require('../../../test');
+var test = require('node:test');
 		var originalReturnValue = {orig:''};
 		function original() {
 			return originalReturnValue;
@@ -11,10 +11,8 @@ var test = require('../../../test');
 
 
 (function(){
-	console.log('partialMockSpec.repeat.');
 
 	(function() {		
-		console.log('expect return foo three times.');
 		var sut = newSut(original);
 
 		sut.expect().return(foo).repeat(3);
@@ -38,7 +36,6 @@ var test = require('../../../test');
 	})();
 
 	(function() {		
-		console.log('expect return foo any.');
 		var sut = newSut(original);
 
 		sut.expect().return(foo).repeatAny();

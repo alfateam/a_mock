@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -7,13 +7,11 @@ var newSut = require('../newHasNoMoreArguments');
 
 
 (function() {
-    console.log('newHasNoMoreArguments');
     var length = 1;
     var mockContext = {};
 
 
     (function() {
-        console.log('two arguments too much.execute');
         mockContext.expectAnything = true;
         var sut = newSut(length, mockContext);
         var returned = sut('somearg', 'c', 'd');
@@ -25,7 +23,6 @@ var newSut = require('../newHasNoMoreArguments');
     })();
 
     (function() {
-        console.log('two arguments too much, but expectAnything.execute');
         mockContext.expectAnything = false;
         var sut = newSut(length, mockContext);
 
@@ -38,7 +35,6 @@ var newSut = require('../newHasNoMoreArguments');
     })();
 
     (function() {
-        console.log('one argument too much.execute');
         mockContext.expectAnything = false;
         var sut = newSut(length, mockContext);
 
@@ -51,7 +47,6 @@ var newSut = require('../newHasNoMoreArguments');
     })();
 
     (function() {
-        console.log('correct number of arguments.execute');
         mockContext.expectAnything = false;
         var sut = newSut(length, mockContext);
 

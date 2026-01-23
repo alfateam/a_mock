@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 var isEqualArg = newRequireMock('./hasSameArgument/isEqualArg');
@@ -7,14 +7,12 @@ var newSut = require('../newHasSameArgument');
 
 
 (function() {
-	console.log('newHasSameArgument');
 	var expectedArg = {};
 	var index = 1;
 	
 	var sut = newSut(expectedArg,index);
 
 	(function() {
-		console.log('too few arguments.execute');
 		var arg = {};
 		var returned = sut(arg);
 
@@ -25,7 +23,6 @@ var newSut = require('../newHasSameArgument');
 	})();
 
 	(function() {
-		console.log('incorrect argument.execute');
 		var arg = {};
 		isEqualArg.expect(expectedArg).expect(arg).return(false);
 		var returned = sut('arg',arg);
@@ -37,7 +34,6 @@ var newSut = require('../newHasSameArgument');
 	})();
 
 	(function() {
-		console.log('correct argument.execute');
 		var arg = {};
 		isEqualArg.expect(expectedArg).expect(arg).return(true);
 
@@ -53,12 +49,10 @@ var newSut = require('../newHasSameArgument');
 		var obj;
 		obj = [];
 		for (var property in obj  ) {
-			console.log(property);
 		};
 
 		obj = {foo: 'hei'};
 		for (var property in obj  ) {
-			console.log(property);
 		};
 
 
@@ -66,12 +60,10 @@ var newSut = require('../newHasSameArgument');
 			this.gag = 'gag';
 			this.baz = {};
 		}
-		Foo.prototype.bar = function(){ console.log('hello ' + this.gag);};
 
 		obj = new Foo();
 		obj2 = new Foo();
 		for (var property in obj  ) {
-			console.log(property);
 		};
 		obj.bar();
 		assert.equal(obj.baz,obj2.baz);

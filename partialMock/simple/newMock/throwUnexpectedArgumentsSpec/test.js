@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../../../../test');
+var test = require('node:test');
 var arg1 = 'a';
 var arg2 = {};
 var arg3 = 'c';
@@ -7,7 +7,6 @@ var errorMsg = "Unexpected arguments: a [object Object] c."
 var thrownErrorMsg;
 
 (function(){
-	console.log('throwUnexpectedArguments');
 	var sut = require('../throwUnexpectedArguments');
 	try	{
 		sut(arg1,arg2,arg3);

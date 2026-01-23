@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../test');
+var test = require('node:test');
 var expectRequire = require('../partialMock/simple/expectRequire');
 var newMockCore = require('../partialMock/simple/newPartialMock');
 
@@ -16,7 +16,6 @@ expectRequire('./partialMock').return(newPartialMock);
 expectRequire('./mock/throwUnexpectedArguments').return(throwUnexpectedArguments);
 
 (function(){
-	console.log('newMock');
 	var partialMock = {};
 	newPartialMock.expect(throwUnexpectedArguments).return(partialMock);
 	var returned = require('../strictMock')();

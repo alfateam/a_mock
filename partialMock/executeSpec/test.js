@@ -1,13 +1,11 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
 (function() {
-	console.log('requireExecute');
 
 	(function(){
-		console.log('correct arguments.execute');
 		var sut = require('../execute');
 		var returnValue = {};
 		var fallback = newMock();
@@ -58,7 +56,6 @@ var newRequireMock = require('../simple/newRequireMock');
 	})();
 	
 	(function(){
-		console.log('incorrect arguments.execute');
 		var sut = require('../execute');
 		var returnValue = {};
 		var whenCalledEmitter = {};

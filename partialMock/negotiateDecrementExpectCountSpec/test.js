@@ -1,12 +1,10 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var sut = require('../negotiateDecrementExpectCount');
 
 (function() {
-	console.log('negotiateDecrementExpectCount');
 	
 	(function(){
-		console.log('times is undefined.execute');
 		var mockContext = {};		
 		mockContext.expectCount = 2;
 		var times;
@@ -18,7 +16,6 @@ var sut = require('../negotiateDecrementExpectCount');
 	})();
 	
 	(function(){
-		console.log('times is set.execute');
 		var mockContext = {};		
 		mockContext.expectCount = 2;
 		var times = 5;

@@ -1,14 +1,12 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newRequireMock = require('../../partialMock/simple/newRequireMock');
 var context = {};
 var sut = require('../tryAdd');
 
 (function(){
-	console.log('tryAddSpec');
 	
 	(function() {
-		console.log('execute');
 		var add = newRequireMock('./add');
 		var didAdd;
 		var callback = {};
@@ -25,7 +23,6 @@ var sut = require('../tryAdd');
 	});
 
 	(function() {
-		console.log('execute with missing callback');
 		var add = newRequireMock('./add');		
 		var didAdd;
 		var callback;

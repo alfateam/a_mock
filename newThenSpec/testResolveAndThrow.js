@@ -1,14 +1,14 @@
 var assert = require('assert');
-var test = require('../test');
+var test = require('node:test');
 var mock = require('../partialMock/simple/newMock');
 
 (function() {
-	console.log('then throws for resolved');
 
 	var expected = {};
 	var expected2 = {};
 	var actual;
 	var actual2;
+	var actualRepeated;
 	var expectedRepeated = {};
 	var actualRepeated2;
 

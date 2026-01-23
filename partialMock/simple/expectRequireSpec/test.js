@@ -1,16 +1,14 @@
 var sut = require('../expectRequire');
 var assert = require('assert');
-var test = require('../../../test');
+var test = require('node:test');
 
 var fooFake = {};
 var bazFake = {};
 	
 
 (function(){
-	console.log('expectRequire');
 
 	(function() {		
-		console.log('require');
 		sut('./foo').return(fooFake);
 		sut('./baz').return(bazFake);
 

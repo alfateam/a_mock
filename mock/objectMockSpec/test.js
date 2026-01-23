@@ -1,17 +1,15 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newRequireMock = require('../../partialMock/simple/newRequireMock');
 var newMock = require('../../partialMock/simple/newMock');
 
 (function(){
-	console.log('objectMock');
 	var newMockContext = newRequireMock('./mockContext');
 	var newPartialMock = newRequireMock('../partialMock');
 	var newSut =  require('../objectMock');
 	
 
 	(function() {
-		console.log('subject is object.new');
 		var newObjectMock = newRequireMock('./objectMock');
 		var initialMockContext = {}
 		var mockContext = {};
@@ -37,21 +35,20 @@ var newMock = require('../../partialMock/simple/newMock');
 			assert.notEqual(returned,subject);
 	    });
 
-	    // test('it should mock property a',function() {
-	    // 	assert.equal(returned.a,aMock);
-	    // });
+	    test('it should mock property a',function() {
+	    	assert.equal(returned.a,aMock);
+	    });
 
-	    // test('it should mock property b',function() {
-	    // 	assert.equal(returned.a,aMock);
-	    // });
+	    test('it should mock property b',function() {
+	    	assert.equal(returned.a,aMock);
+	    });
 
-	    // test('it should set verify',function() {
-	    // 	assert.equal(returned.verify,verify);
-	    // });
+	    test('it should set verify',function() {
+	    	assert.equal(returned.verify,verify);
+	    });
 	})();
 
 	(function() {
-		console.log('subject is func.new');
 		var newObjectMock = newRequireMock('./objectMock');
 		var initialMockContext = {}
 		var mockContext = {};
@@ -102,7 +99,6 @@ var newMock = require('../../partialMock/simple/newMock');
 	})();
 
 	(function() {
-		console.log('subject is primitive');
 		var newObjectMock = newRequireMock('./objectMock');
 		var initialMockContext = {}
 		var mockContext = {};

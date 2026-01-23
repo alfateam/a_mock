@@ -1,9 +1,8 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newMock = require('../../partialMock/simple/newMock');
 
 (function(){
-	console.log('propertyMock.new');
 	newSut = require('../propertyMock');
 
 	var subject = {};
@@ -22,7 +21,6 @@ var newMock = require('../../partialMock/simple/newMock');
 	});
 
 	(function() {
-		console.log('execute mocked property');
 		var mockedValue = {};
 		var arg = {};
 		mock.expect(arg).return(mockedValue);

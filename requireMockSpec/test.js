@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../test');
+var test = require('node:test');
 var newMock = require('../partialMock/simple/newMock');
 var expectRequire = require('../partialMock/simple/expectRequire');
 
@@ -11,7 +11,6 @@ expectRequire('./mock').return(newMockMock);
 expectRequire('./expectRequire').return(expectRequireMock);
 
 (function() {
-	console.log('newRequireMock');
 	var didExpectRequireReturnMock = false;
 	var mock = {};
 	var moduleName = {};

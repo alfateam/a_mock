@@ -1,13 +1,11 @@
 var assert = require('assert');
-var test = require('../test');
+var test = require('node:test');
 var newSut = require('../newTrueOnceThenFalse');
 
 (function(){
-	console.log('newTrueOnceThenFalse');
 	var sut = newSut();
 
 	(function() {
-		console.log('execute');
 		var returned = sut();
 		
 		test('it should return true',function() {
@@ -15,7 +13,6 @@ var newSut = require('../newTrueOnceThenFalse');
 		});
 
 		(function() {
-			console.log('execute');
 			var returned = sut();
 			test('it should return false',function() {
 				assert.equal(false,returned);

@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../test')
+var test = require('node:test')
 var newRequireMock = require('../partialMock/simple/newRequireMock');
 var newMock = require('../partialMock/simple/newMock');
 
@@ -13,13 +13,11 @@ var tryRemove = newRequireMock('./eventEmitter/tryRemove');
 var newSut = require('../eventEmitter');
 
 (function(){
-	console.log('newEventEmitter');
 	var context = {};
 	newEmitterContext.expect().return(context);
 	var sut = newSut();
 
 	(function() {
-		console.log('add');
 		var callback = {};
 		var didAdd;
 		add.expect(context).expect(callback).whenCalled(onAdd).return();
@@ -40,7 +38,6 @@ var newSut = require('../eventEmitter');
 	})();
 
 	(function() {
-		console.log('tryAdd');
 		var callback = {};
 		var didAdd;
 		tryAdd.expect(context).expect(callback).whenCalled(onAdd).return();
@@ -61,7 +58,6 @@ var newSut = require('../eventEmitter');
 	})();
 
 	(function() {
-		console.log('remove');
 		var callback = {};
 		var didRemove;
 		remove.expect(context).expect(callback).whenCalled(onRemove).return();
@@ -82,7 +78,6 @@ var newSut = require('../eventEmitter');
 	})();
 
 	(function() {
-		console.log('tryRemove');
 		var callback = {};
 		var didtryRemove;
 		tryRemove.expect(context).expect(callback).whenCalled(ontryRemove).return();
@@ -103,7 +98,6 @@ var newSut = require('../eventEmitter');
 	})();
 
 	(function() {
-		console.log('emit');
 		var callback = {};
 		var didemit;
 		var callback = newMock();

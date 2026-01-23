@@ -1,9 +1,8 @@
 var assert = require('assert');
-var test = require('../test');
+var test = require('node:test');
 var mock = require('../partialMock/simple/newMock');
 
 (function() {
-	console.log('then resolve');
 
 	var expected = {};
 	var expected2 = {};

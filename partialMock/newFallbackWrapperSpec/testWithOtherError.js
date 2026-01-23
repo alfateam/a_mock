@@ -1,12 +1,11 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 var getStackTrace = newRequireMock('./fallbackWrapper/getStackTrace');
 var newSut = require('../newFallbackWrapper');
 
 (function() {
-	console.log('newFallbackWrapper');	
 	var sut = newSut(originalFallback);
 	var didIncrementStackTrace
 	var originalStackTraceLimit = Error.stackTraceLimit;
@@ -21,7 +20,6 @@ var newSut = require('../newFallbackWrapper');
 	}
 
 	(function() {
-		console.log('execute with mock error');
 		var arg = {};				
 		var error;		
 			
@@ -29,7 +27,6 @@ var newSut = require('../newFallbackWrapper');
 			sut(arg);
 		}
 		catch(e) {
-			console.log('foo: ' + e.stack);
 			error = e;
 		}		
 

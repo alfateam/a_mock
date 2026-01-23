@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -10,7 +10,6 @@ var sut = require('../ignore');
 
 
 (function(){
-	console.log('ignore');
 	var mockContext = {};
 	var index = {};
 	var expected = {};

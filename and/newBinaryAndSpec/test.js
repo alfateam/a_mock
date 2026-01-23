@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newRequireMock = require('../../partialMock/simple/newRequireMock');
 var newMock = require('../../partialMock/simple/newMock');
 
@@ -8,13 +8,11 @@ var newSut = require('../newBinaryAnd');
 
 
 (function(){
-	console.log('newBinaryAnd');
 	var predicate = newMock();
 	var predicate2 = newMock();
 	var sut = newSut(predicate,predicate2);
 
 	(function() {
-		console.log('execute when predicate1 returns false');
 		var arg = {};
 		predicate.expect(arg).return(false);		
 		var returned = sut(arg);
@@ -25,7 +23,6 @@ var newSut = require('../newBinaryAnd');
 	})();
 
 	(function() {
-		console.log('execute when predicate1 returns true, predicate2 returns false');
 		var arg = {};
 		predicate.expect(arg).return(true);		
 		predicate2.expect(arg).return(false);		
@@ -37,7 +34,6 @@ var newSut = require('../newBinaryAnd');
 	})();
 
 	(function() {
-		console.log('execute when predicate1 returns true, predicate2 returns true');
 		var arg = {};
 		predicate.expect(arg).return(true);		
 		predicate2.expect(arg).return(true);		
@@ -49,7 +45,6 @@ var newSut = require('../newBinaryAnd');
 	})();
 
 	(function() {
-		console.log('add');		
 		var binaryAnd = {};
 		var predicate = {};
 		var predicate2 = {};
@@ -64,4 +59,3 @@ var newSut = require('../newBinaryAnd');
 		});
 	})();
 });
-

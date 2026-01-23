@@ -1,17 +1,14 @@
 var assert = require('assert');
-var test = require('../test');
+var test = require('node:test');
 var newSut = require('../newTrueNTimesThenFalse');
 
 (function(){
-	console.log('newTrueNTimesThenFalse');
 	
 	(function() {
-		console.log('two times');
 		var times = 2;
 		var sut = newSut(times);
 
 		(function(){
-			console.log('execute three times');
 			var returned = sut();
 			var returned2 = sut();
 			var returned3 = sut();
@@ -33,11 +30,9 @@ var newSut = require('../newTrueNTimesThenFalse');
 	})();
 
 	(function() {
-		console.log('undefined times');
 		var sut = newSut();		
 		
 		(function(){
-			console.log('execute n times');
 			var returned = sut();
 			var returned2 = sut();
 			var returned3 = sut();

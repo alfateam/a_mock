@@ -1,6 +1,6 @@
 var newSut = require('../newPartialMock');
 var assert = require('assert');
-var test = require('../../../test');
+var test = require('node:test');
 
 		var originalReturnValue = {orig:''};
 		function original() {
@@ -12,10 +12,8 @@ var test = require('../../../test');
 
 
 (function(){
-	console.log('partialMockSpec');
 
 	(function() {		
-		console.log('expect return foo once');
 		
 		var sut = newSut(original);
 
@@ -40,7 +38,6 @@ var test = require('../../../test');
 	})();
 
 	(function() {		
-		console.log('expect return foo twice');		
 		var sut = newSut(original);
 		sut.expect().return(foo);
 		sut.expect().return(foo);
@@ -64,7 +61,6 @@ var test = require('../../../test');
 	})();
 
 	(function() {		
-		console.log('expect return after reset');		
 		var sut = newSut(original);
 		sut.expect().return(foo);
 		sut.expect().return(foo);
@@ -90,7 +86,6 @@ var test = require('../../../test');
 	})();
 
 	(function() {		
-		console.log('expect return foo then baz');		
 		var sut = newSut(original);
 		sut.expect().return(foo);
 		sut.expect().return(baz);
@@ -114,7 +109,6 @@ var test = require('../../../test');
 	})();
 
 	(function() {		
-		console.log('expect return when argument is undefined.');	
 		var sut = newSut(original);
 		var arg = {};
 		var someUndefined;

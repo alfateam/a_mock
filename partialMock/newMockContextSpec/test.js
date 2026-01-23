@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -9,7 +9,6 @@ var reset = newRequireMock('./mockContext/reset');
 var newSut = require('../newMockContext');
 
 (function() {
-	console.log('newMockContext');
 	var originalFallback = {};
 	var didReset;
 	var object = {};
@@ -26,7 +25,6 @@ var newSut = require('../newMockContext');
 		assert.equal(sut, context);
 	});
 
-	console.log('reset');
 	// thisArg is optional and should not be required by callers.
 	reset.expect(context).expect(originalFallback).expectAnything().return(resetResult);
 	returned = sut.reset();

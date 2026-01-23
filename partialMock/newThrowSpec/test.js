@@ -1,10 +1,9 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var sut = require('../newThrow');
 var error = {};
 
 (function(){
-	console.log('newThrow');
 	var thrown;
 	try	{
 		var _throw = sut(error);

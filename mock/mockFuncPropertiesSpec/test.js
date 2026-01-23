@@ -1,16 +1,14 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newRequireMock = require('../../partialMock/simple/newRequireMock');
 var newMock = require('../../partialMock/simple/newMock');
 
 (function(){
-	console.log('mockFuncProperties');
 	var newPropertyMock = newRequireMock('./propertyMock');
 	var mockFuncProperties = newRequireMock('./mockFuncProperties');
 	var sut = require('../mockFuncProperties');
 
 	(function() {
-		console.log('subject is non-primitive');
 		var subject = {};
 		var a2 = {};
 		var a = function() {};
@@ -54,7 +52,6 @@ var newMock = require('../../partialMock/simple/newMock');
 	})();
 
 	(function() {
-		console.log('subject is primitive');
 		var subject = 'a';
 		var mockObject = 'a';
 

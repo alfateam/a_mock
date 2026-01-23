@@ -1,12 +1,10 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var sut = require('../add');
 
 (function(){
-	console.log('addSpec');
 
 	(function() {
-		console.log('execute');
 		var context = {};
 		var callbacks = [{}];
 		context.callbacks = callbacks;

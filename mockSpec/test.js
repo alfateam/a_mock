@@ -1,9 +1,8 @@
 var assert = require('assert');
-var test = require('../test');
+var test = require('node:test');
 var newRequireMock = require('../partialMock/simple/newRequireMock');
 
 (function(){
-	console.log('mock');
 	var newStrictMock = newRequireMock('./strictMock');
 	var newObjectMock = newRequireMock('./mock/objectMock');
 	var mockFuncProperties = newRequireMock('./mock/mockFuncProperties');
@@ -11,7 +10,6 @@ var newRequireMock = require('../partialMock/simple/newRequireMock');
 	var sut = require('../mock');		
 
 	(function() {
-		console.log('object input.new');
 		var input = {};
 		var objectMock = {};
 		var didMockFuncProperties;
@@ -36,7 +34,6 @@ var newRequireMock = require('../partialMock/simple/newRequireMock');
 	})();
 
 	(function() {
-		console.log('func input.new');
 		var expected = {};
 		var input = function() {};
 		newPartialMock.expect(input).return(expected);
@@ -50,7 +47,6 @@ var newRequireMock = require('../partialMock/simple/newRequireMock');
 	});
 
 	(function() {
-		console.log('empty input new');
 		var expected = {};
 	
 		newStrictMock.expect().return(expected);

@@ -1,5 +1,5 @@
 var assert = require('assert');
-var test = require('../../test');
+var test = require('node:test');
 var newMock = require('../simple/newMock');
 var newRequireMock = require('../simple/newRequireMock');
 
@@ -9,7 +9,6 @@ var newHasNoMoreArguments = newRequireMock('./newHasNoMoreArguments');
 var sut = require('../return');
 
 (function(){
-	console.log('return');
 	var mockContext = {};
 	var hasNoMoreArguments = {};
 	var returnValue = 'returnValue';
@@ -56,7 +55,6 @@ var sut = require('../return');
 	});
 
 	(function() {
-		console.log('repeat');
 		var didSetExecute;
 		var expected = {};
 		var times = 2;		
@@ -80,7 +78,6 @@ var sut = require('../return');
 
 
 	(function() {
-		console.log('repeatAny');
 		var didSetExecute;
 		var expected = {};
 		setExecute.expect(returnValue).expect(compositeAreCorrectArguments).expect(mockContext).whenCalled(onSetExecuteNTimes).return(null);
