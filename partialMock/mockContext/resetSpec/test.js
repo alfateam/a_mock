@@ -14,7 +14,8 @@ var sut = require('../reset');
 	var originalFallback = {};
 	var fallbackWrapper = {};
 	var mutableAnd = {};
-	newFallbackWrapper.expect(originalFallback).return(fallbackWrapper);
+	// thisArg is optional and should not be required by callers.
+	newFallbackWrapper.expect(originalFallback).expectAnything().return(fallbackWrapper);
 	newMutableAnd.expect().return(mutableAnd);
 	
 	sut(context,originalFallback);

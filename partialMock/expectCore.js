@@ -25,6 +25,8 @@ function expect(hasCorrectArgument,index,mockContext) {
 		return expectAnything(index+1,mockContext);
 	};
 
+	c.ignoreAll = c.expectAnything;
+
 	c.ignore = function() {
 		return ignore(index+1,mockContext);
 	}

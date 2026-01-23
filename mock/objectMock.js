@@ -27,6 +27,18 @@ function _new(subject,mockContext,parent) {
 
 	var mockContext = newMockContext(mockContext);
 	var mock = {};
+	if (subject && typeof subject === 'function' && typeof subject.expectAnything === 'function' && typeof subject.expect === 'function')
+		return subject;
+	var mockedMap = mockContext._mockedMap;
+	if (!mockedMap) {
+		mockedMap = new WeakMap();
+		mockContext._mockedMap = mockedMap;
+	}
+	if (subject && (typeof subject === 'object' || typeof subject === 'function')) {
+		var existingMock = mockedMap.get(subject);
+		if (existingMock)
+			return existingMock;
+	}
 	mock.verify = mockContext.verify;
 	if (subject instanceof Function) {
 		mock = newPartialMock(subject, parent);		
@@ -34,6 +46,7 @@ function _new(subject,mockContext,parent) {
 	}
 	if (!(subject instanceof Object))
 		return mock;
+	mockedMap.set(subject, mock);
 	var propertyNames = collectPropertyNames(subject);
 	for(var i = 0; i < propertyNames.length; i++) {
 		var propertyName = propertyNames[i];

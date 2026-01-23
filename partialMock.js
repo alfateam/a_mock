@@ -35,6 +35,8 @@ function create(originalFunc, thisArg) {
 		return expectAnything.apply(null,args);
 	};
 
+	mock.ignoreAll = mock.expectAnything;
+
 	mock.ignore = function() {
 		negotiateEnd();
 		mockContext.compositeAreCorrectArguments = newEmptyAnd();

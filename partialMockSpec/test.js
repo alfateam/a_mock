@@ -28,7 +28,8 @@ function fallback() {}
 		function stubMockContext() {
 			mockContext = {};
 			mockContext.reset = {};
-			newMockContext.expect(fallback).return(mockContext);
+			// Allow optional thisArg without changing public usage.
+			newMockContext.expect(fallback).expectAnything().return(mockContext);
 		}
 
 		sut = newSut(fallback);

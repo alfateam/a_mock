@@ -24,6 +24,8 @@ function expectAnything(index,mockContext) {
 		return c;
 	}
 
+	c.ignoreAll = c.expectAnything;
+
 	c.return = function(arg) {
 		return _return(arg,index+1,mockContext);
 	};

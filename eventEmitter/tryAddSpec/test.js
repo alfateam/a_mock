@@ -1,7 +1,7 @@
 var assert = require('assert');
 var test = require('../../test');
 var newRequireMock = require('../../partialMock/simple/newRequireMock');
-
+var context = {};
 var sut = require('../tryAdd');
 
 (function(){

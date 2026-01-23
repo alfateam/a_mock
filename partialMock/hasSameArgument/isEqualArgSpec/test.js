@@ -77,7 +77,7 @@ var sut = require('../isEqualArg');
 
     (function() {
         console.log('shallow.array with equal contents.execute');
-        var returned = sut([expectedArg, 1, 'foo', new Buffer('abc'), new Date(2000)], [expectedArg, 1, 'foo', new Buffer('abc'), new Date(2000)]);
+        var returned = sut([expectedArg, 1, 'foo', Buffer.from('abc'), new Date(2000)], [expectedArg, 1, 'foo', Buffer.from('abc'), new Date(2000)]);
 
         test('it should return true', function() {
             assert.equal(true, returned);
@@ -212,7 +212,7 @@ var sut = require('../isEqualArg');
 
     (function() {
         console.log('buffers with equal contents.execute');
-        var returned = sut(new Buffer('abc'), new Buffer('abc'));
+        var returned = sut(Buffer.from('abc'), Buffer.from('abc'));
 
         test('it should return true', function() {
             assert.equal(true, returned);
@@ -222,7 +222,7 @@ var sut = require('../isEqualArg');
 
     (function() {
         console.log('buffer and non-buffer contents.execute');
-        var returned = sut(new Buffer('abc'), 'abc');
+        var returned = sut(Buffer.from('abc'), 'abc');
 
         test('it should return false', function() {
             assert.equal(false, returned);
@@ -232,7 +232,7 @@ var sut = require('../isEqualArg');
 
     (function() {
         console.log('buffers with different contents.execute');
-        var returned = sut(new Buffer('aba'), new Buffer('abc'));
+        var returned = sut(Buffer.from('aba'), Buffer.from('abc'));
 
         test('it should return false', function() {
             assert.equal(false, returned);
@@ -242,7 +242,7 @@ var sut = require('../isEqualArg');
 
     (function() {
         console.log('buffers partly equal contents.execute');
-        var returned = sut(new Buffer('ab'), new Buffer('abc'));
+        var returned = sut(Buffer.from('ab'), Buffer.from('abc'));
 
         test('it should return false', function() {
             assert.equal(false, returned);

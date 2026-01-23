@@ -17,7 +17,8 @@ var newSut = require('../newMockContext');
 	var resetResult = {};
 
 	newObject.expect().return(object);
-	reset.expect(object).expect(originalFallback).return(context);
+	// thisArg is optional and should not be required by callers.
+	reset.expect(object).expect(originalFallback).expectAnything().return(context);
 	var sut = newSut(originalFallback);
 
 
@@ -26,7 +27,8 @@ var newSut = require('../newMockContext');
 	});
 
 	console.log('reset');
-	reset.expect(context).expect(originalFallback).return(resetResult);
+	// thisArg is optional and should not be required by callers.
+	reset.expect(context).expect(originalFallback).expectAnything().return(resetResult);
 	returned = sut.reset();
 
 	test('forwards to reset',function() {

@@ -77,6 +77,8 @@ function create(originalFunc) {
 		return mock;
 	}
 
+	mock.ignoreAll = mock.expectAnything;
+
 	function verifyAnyArgument(arg) 
 	{
 		return true;

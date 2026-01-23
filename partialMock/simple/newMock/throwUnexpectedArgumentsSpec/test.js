@@ -13,7 +13,7 @@ var thrownErrorMsg;
 		sut(arg1,arg2,arg3);
 	}
 	catch(error) {
-		thrownErrorMsg = error;
+		thrownErrorMsg = error && error.message;
 	}
 
 	test('it should throw correct msg', function(){
