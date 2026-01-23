@@ -38,6 +38,7 @@ function expect(hasCorrectArgument,index,mockContext) {
 	c.return = function(arg) {
 		return _return(arg,index+1,mockContext);
 	};
+	c.returnLoose = c.return;
 
 	c.whenCalled = function(callback) {
 		mockContext.whenCalledEmitter.add(callback);

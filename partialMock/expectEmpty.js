@@ -13,6 +13,7 @@ function expectEmpty(mockContext) {
 	c.return = function(arg) {
 		return _return(arg,0,mockContext);
 	};
+	c.returnLoose = c.return;
 
 	c.whenCalled = function(callback) {
 		mockContext.whenCalledEmitter.add(callback);
