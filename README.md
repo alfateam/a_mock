@@ -110,8 +110,10 @@ mock({a : 1}); //returns 'fake1'
 mock({a : 2}); //returns 'fake2'
 mock({a : 2, b : {c : 'foo', d : ['me', 'too']}}); //returns 'fake3'
 mock(obj);  //returns 'fake4'
-mock({});  //throws unexpected arguments
+mock({});  //throws unexpected arguments cause leaf properties are not equal
 ```
+
+Note: Struct matching is strict on leaf properties. All leaf property values must be equal to match, and an empty object does not match a non-empty expected struct.
 
 __Repeats__
 
